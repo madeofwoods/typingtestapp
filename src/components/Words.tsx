@@ -3,9 +3,6 @@ import { demoWords, isCorrect, isIncorrect, isIncorrectSpace } from "../utils/ut
 import classNames from "classnames";
 
 const Words = () => {
-  const charachters = (words: string) => {
-    return words.split("");
-  };
   const [active, setActive] = useState(true);
   const [typedChars, setTypedChars] = useState<string>("");
   const [numberChars, setNumberChars] = useState<number>(typedChars.length);
@@ -52,8 +49,10 @@ const Words = () => {
                 "text-green-500": isCorrect(char, index, typedChars, numberChars),
                 "text-red-500": isIncorrect(char, index, typedChars, numberChars),
                 "bg-red-500/50": isIncorrectSpace(char, index, typedChars, numberChars),
-                " border-l-white border-l": index == numberChars,
-                "border-l-red-100/0 border-l": index != numberChars,
+                // " border-l-white border-l": index == numberChars,
+                // "border-l-red-100/0 border-l": index != numberChars,
+                // "animate-flash": index == numberChars,
+                "animate-caret": index == numberChars,
                 // "underline underline-offset-16": index == numberChars,
               })} `}
             >
