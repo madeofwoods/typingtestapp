@@ -10,13 +10,16 @@ type WordsProps = {
 };
 
 const Words = ({ gameState, setGameState }: WordsProps) => {
-  const { typedChars, setTypedChars, numberChars, setNumberChars } = useContext(GlobalContext) as GlobalContextType;
+  const { typedChars, setTypedChars, numberChars, setNumberChars, setStartTime } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
       if (gameState === "finish") return;
       if (gameState === "start") {
         setGameState("run");
+        setStartTime(new Date());
       }
       switch (e.key) {
         case "Backspace":
@@ -28,7 +31,7 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
           setTypedChars((prev) => prev + e.key);
       }
     },
-    [gameState, setGameState, setTypedChars]
+    [gameState, setGameState, setTypedChars, setStartTime]
   );
 
   useEffect(() => {

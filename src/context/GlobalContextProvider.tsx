@@ -9,6 +9,8 @@ export type GlobalContextType = {
   setNumberChars: React.Dispatch<React.SetStateAction<number>>;
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
+  startTime: Date;
+  setStartTime: React.Dispatch<React.SetStateAction<Date>>;
 };
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
@@ -17,6 +19,7 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [typedChars, setTypedChars] = useState<string>("");
   const [numberChars, setNumberChars] = useState<number>(typedChars.length);
   const [gameState, setGameState] = useState<gameStateType>("start");
+  const [startTime, setStartTime] = useState<Date>(new Date());
 
   const store = useMemo(
     () => ({
@@ -26,8 +29,10 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
       setNumberChars,
       gameState,
       setGameState,
+      startTime,
+      setStartTime,
     }),
-    [typedChars, numberChars, gameState]
+    [typedChars, numberChars, gameState, startTime]
   );
   return <GlobalContext.Provider value={store}>{children}</GlobalContext.Provider>;
 };
