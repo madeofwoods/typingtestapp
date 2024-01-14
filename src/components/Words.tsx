@@ -1,15 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { demoWords, isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
 import classNames from "classnames";
+import { gameStateType } from "../pages/Game";
+import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 
-const Words = () => {
-  const [active, setActive] = useState(true);
-  const [typedChars, setTypedChars] = useState<string>("");
-  const [numberChars, setNumberChars] = useState<number>(typedChars.length);
+type WordsProps = {
+  gameState: gameStateType;
+  setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
+};
+
+const Words = ({ gameState, setGameState }: WordsProps) => {
+  const { typedChars, setTypedChars, numberChars, setNumberChars } = useContext(GlobalContext) as GlobalContextType;
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
-      if (!active) return;
+      if (gameState === "finish") return;
+      if (gameState === "start") {
+        setGameState("run");
+      }
       switch (e.key) {
         case "Backspace":
           setTypedChars((prev) => prev.slice(0, -1));
@@ -18,10 +26,9 @@ const Words = () => {
           break;
         default:
           setTypedChars((prev) => prev + e.key);
-          console.log("event", e);
       }
     },
-    [active]
+    [gameState, setGameState, setTypedChars]
   );
 
   useEffect(() => {
@@ -34,11 +41,11 @@ const Words = () => {
 
   useEffect(() => {
     setNumberChars(typedChars.length);
-  }, [typedChars]);
+  }, [setNumberChars, typedChars]);
 
   return (
     <div id="wordsContainer">
-      <div className="text-4xl w-[720px] tracking-normal leading-relaxed whitespace-break-spaces">
+      <div className="text-2xl w-[720px] tracking-normal leading-relaxed whitespace-break-spaces">
         {demoWords
           .split("")
           .map((char) => (char === " " ? " " : char))
