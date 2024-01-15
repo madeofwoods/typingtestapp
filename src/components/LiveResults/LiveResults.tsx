@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext, GlobalContextType } from "../../context/GlobalContextProvider";
 import { demoWords } from "../../utils/utils";
 import { calculateErrors, getNetWPM } from "./utils";
+import Acceleration from "../Acceleration";
 
 const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
   const { typedChars, numberChars, startTime } = useContext(GlobalContext) as GlobalContextType;
@@ -22,6 +23,7 @@ const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
       <div className="border-2 border-purple-500 w-20 py-4 text-center text-purple-400">
         {getNetWPM(typedChars.length, elapsedTime, errors)}
       </div>
+      <Acceleration />
       <div className="border-2 border-slate-500 w-20 py-4 text-center">{timeRemaining}</div>
     </div>
   );

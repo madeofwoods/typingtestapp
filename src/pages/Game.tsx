@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LiveResults from "../components/LiveResults/LiveResults";
 import Words from "../components/Words";
 import useTimer from "../hooks/useTimer";
+import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 
 export type gameStateType = "start" | "run" | "finish";
 
 const Game = () => {
-  const [gameState, setGameState] = useState<gameStateType>("start");
+  const { gameState, setGameState } = useContext(GlobalContext) as GlobalContextType;
   const { timeRemaining, startTimer, resetTimer } = useTimer(10);
 
   useEffect(() => {
