@@ -23,7 +23,7 @@ const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
       <div className="border-2 border-purple-500 w-20 py-4 text-center text-purple-400">
         {getNetWPM(typedChars.length, elapsedTime, errors)}
       </div>
-      <Acceleration />
+      {/* <Acceleration /> */}
       <div className="border-2 border-slate-500 w-20 py-4 text-center">{timeRemaining}</div>
     </div>
   );
