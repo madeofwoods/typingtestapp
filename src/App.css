@@ -17,3 +17,9 @@ body {
   color: aliceblue;
   font-family: monospace;
 }
+
+/* .speedometer,
+.speedometerBlur {
+  stroke-dashoffset: 200px;
+  stroke-dasharray: 100px;
+} */
