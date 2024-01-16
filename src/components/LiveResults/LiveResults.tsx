@@ -13,6 +13,15 @@ const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [errors, setErrors] = useState<number>(0);
 
+  const getAccuracy = (typedChars: string, errors: number): number => {
+    const numberTyped: number = typedChars.length;
+    if (numberTyped == 0) return 0;
+    if (errors == 0) return 100;
+    else {
+      return Math.round(((numberTyped - errors) / numberTyped) * 100);
+    }
+  };
+
   useEffect(() => {
     const currentTime = new Date();
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
@@ -31,7 +40,13 @@ const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
         <div className="border-2 border-slate-500 w-20 py-4 text-center">{timeRemaining}</div>
       </div> */}
       <div className=" w-[800px] h-[400px] mb-20">
-        <FullDashboard typedChars={typedChars} elapsedTime={elapsedTime} errors={errors} />
+        <FullDashboard
+          typedChars={typedChars}
+          elapsedTime={elapsedTime}
+          errors={errors}
+          timeRemaining={timeRemaining}
+          accuracy={getAccuracy(typedChars, errors)}
+        />
       </div>
     </div>
   );

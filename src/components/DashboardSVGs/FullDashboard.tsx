@@ -5,10 +5,14 @@ const FullDashboard = ({
   typedChars,
   elapsedTime,
   errors,
+  timeRemaining,
+  accuracy,
 }: {
   typedChars: string;
   elapsedTime: number;
   errors: number;
+  timeRemaining: number;
+  accuracy: number;
 }) => {
   const width: number = 800;
   const height: number = 500;
@@ -73,7 +77,14 @@ const FullDashboard = ({
               opacity={0.4}
             />
           </g>
-          ‍
+          <g id="clock">
+            ‍<circle cx={1200} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.3} r={100} strokeWidth={6}></circle>‍
+            <circle cx={1200} cy={300} stroke={"url(#grad)"} opacity={0.3} r={100} strokeWidth={6}></circle>
+          </g>
+          <g id="clock">
+            ‍<circle cx={292} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.3} r={100} strokeWidth={6}></circle>‍
+            <circle cx={292} cy={300} stroke={"url(#grad)"} opacity={0.3} r={100} strokeWidth={6}></circle>
+          </g>
           <circle
             cx={cx}
             cy={cy}
@@ -118,10 +129,27 @@ const FullDashboard = ({
               strokeDasharray={dashArray}
               strokeDashoffset={percentage}
             />
-          </g>{" "}
+          </g>
           <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative">
-            <div className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest ">
+            <div
+              id="speed"
+              className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest "
+            >
               {getNetWPM(typedChars.length, elapsedTime, errors).toFixed(0).padStart(3, "0")}
+            </div>
+
+            <div
+              id="clock"
+              className="absolute text-5xl left-[1200px] top-[300px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            >
+              {timeRemaining.toFixed(0)}
+            </div>
+            <div
+              id="accuracy"
+              className="absolute text-5xl left-[292px] top-[300px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            >
+              {accuracy}
+              <span>%</span>
             </div>
           </foreignObject>
           <defs>
