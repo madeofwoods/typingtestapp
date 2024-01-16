@@ -6,6 +6,7 @@ import Acceleration from "../Acceleration";
 import Speedometer from "../Speedometer";
 import SpeedometerTwo from "../SpeedometerTwo";
 import Dashboard from "../DashboardSVGs/Dashboard";
+import FullDashboard from "../DashboardSVGs/FullDashboard";
 
 const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
   const { typedChars, numberChars, startTime } = useContext(GlobalContext) as GlobalContextType;
@@ -29,9 +30,8 @@ const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
         </div>
         <div className="border-2 border-slate-500 w-20 py-4 text-center">{timeRemaining}</div>
       </div> */}
-      <div className="mx-auto p-10 flex items-center justify-center">
-        <SpeedometerTwo typedChars={typedChars} elapsedTime={elapsedTime} errors={errors} />
-        <div className=""></div>
+      <div className=" w-[800px] h-[400px] mb-20">
+        <FullDashboard typedChars={typedChars} elapsedTime={elapsedTime} errors={errors} />
       </div>
     </div>
   );

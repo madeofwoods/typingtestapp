@@ -47,7 +47,7 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
   }, [setNumberChars, typedChars]);
 
   return (
-    <div id="wordsContainer">
+    <div id="wordsContainer" className=" w-[800px] pl-[80px] mt-14">
       <div className="text-2xl w-[720px] tracking-normal leading-relaxed whitespace-break-spaces">
         {demoWords
           .split("")
@@ -56,9 +56,9 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
             <span
               key={`${char}_${index}`}
               className={`${classNames({
-                "text-green-500": isCorrect(char, index, typedChars, numberChars),
-                "text-red-500": isIncorrect(char, index, typedChars, numberChars),
-                "bg-red-500/50": isIncorrectSpace(char, index, typedChars, numberChars),
+                "text-purple-500": isCorrect(char, index, typedChars, numberChars),
+                "text-pink-600": isIncorrect(char, index, typedChars, numberChars),
+                "bg-pink-600/50": isIncorrectSpace(char, index, typedChars, numberChars),
                 // " border-l-white border-l": index == numberChars,
                 // "border-l-red-100/0 border-l": index != numberChars,
                 // "animate-flash": index == numberChars,

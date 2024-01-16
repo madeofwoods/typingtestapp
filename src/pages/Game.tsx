@@ -24,7 +24,7 @@ const Game = () => {
   }, [gameState, resetTimer, startTimer]);
 
   return (
-    <div className="bg-slate-900 w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col">
+    <div className="bg-black w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col">
       <LiveResults timeRemaining={timeRemaining} />
       <Words gameState={gameState} setGameState={setGameState} />
     </div>
