@@ -8,7 +8,7 @@ export type gameStateType = "start" | "run" | "finish";
 
 const Game = () => {
   const { gameState, setGameState } = useContext(GlobalContext) as GlobalContextType;
-  const { timeRemaining, startTimer, resetTimer } = useTimer(10);
+  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(10);
 
   useEffect(() => {
     timeRemaining == 0 && setGameState("finish");
@@ -25,7 +25,7 @@ const Game = () => {
 
   return (
     <div className="bg-black w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col">
-      <LiveResults timeRemaining={timeRemaining} />
+      <LiveResults timeRemaining={timeRemaining} counter={counter} />
       <Words gameState={gameState} setGameState={setGameState} />
     </div>
   );

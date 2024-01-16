@@ -8,10 +8,11 @@ import SpeedometerTwo from "../SpeedometerTwo";
 import Dashboard from "../DashboardSVGs/Dashboard";
 import FullDashboard from "../DashboardSVGs/FullDashboard";
 
-const LiveResults = ({ timeRemaining }: { timeRemaining: number }) => {
+const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
   const { typedChars, numberChars, startTime } = useContext(GlobalContext) as GlobalContextType;
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [errors, setErrors] = useState<number>(0);
+  const [numberTyped, setNumberTyped] = useState([]);
 
   const getAccuracy = (typedChars: string, errors: number): number => {
     const numberTyped: number = typedChars.length;

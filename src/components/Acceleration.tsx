@@ -63,7 +63,8 @@ const Acceleration = () => {
     }
   }, [gameState]);
 
-  return <div className="border-2 border-orange-500 w-20 py-4 text-center">{currentSpeed}</div>;
+  // return <div className="border-2 border-orange-500 w-20 py-4 text-center">{currentSpeed}</div>;
+  return { currentSpeed };
 };
 
 export default Acceleration;
