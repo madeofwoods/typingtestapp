@@ -18,18 +18,18 @@ export default {
           "50%": { borderLeft: "1px solid rgb(127,127,127,0.3)" },
         },
         opactityLeft: {
-          "0%": { opacity: "0.15" },
-          "100%": { opacity: "0.4" },
+          "0%": { opacity: "0.45" },
+          "100%": { opacity: "1" },
         },
         opactityRight: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "0.6" },
+          "0%": { opacity: "0.3" },
+          "100%": { opacity: "0.9" },
         },
       },
       animation: {
         caret: "caret 1s ease-in-out infinite",
         flash: "flash 1s ease-in-out infinite",
-        opactityLeft: "opactityLeft 0.6s ease-in-out forwards 0.1s",
+        opactityLeft: "opactityLeft 1.4s ease-in-out forwards 0.1s",
         opactityRight: "opactityRight 1.2s ease-in-out forwards 0.8s",
       },
     },
