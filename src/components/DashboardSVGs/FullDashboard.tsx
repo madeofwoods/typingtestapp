@@ -9,6 +9,7 @@ const FullDashboard = ({
   timeRemaining,
   accuracy,
   speedArray,
+  wpm,
 }: {
   typedChars: string;
   elapsedTime: number;
@@ -16,6 +17,7 @@ const FullDashboard = ({
   timeRemaining: number;
   accuracy: number;
   speedArray: number[];
+  wpm: number;
 }) => {
   const width: number = 800;
   const height: number = 500;
@@ -32,6 +34,7 @@ const FullDashboard = ({
   const speedBarX = 1110;
   const speedBarY = -600;
   const speedBarHeight = 90;
+  const speedBarColor = "rgb(255,145,210, 0.55)";
 
   const getSpeed = (speedArray: number[], index: number): number => {
     const speed: number = speedArray[speedArray.length - index];
@@ -54,7 +57,32 @@ const FullDashboard = ({
       <div>
         {" "}
         <svg width={width} height={height} viewBox="0 0 1492 717" className=" ">
-          <path
+          {/* BG2 */}
+          <g>
+            <rect
+              x="50"
+              y="40"
+              width="1389"
+              height="698"
+              rx="169.5"
+              fill="url(#paint0_linear_107_6)"
+              fillOpacity="0.7"
+              stroke="url(#paint1_linear_107_6)"
+              strokeWidth="4"
+            />
+            <rect
+              x="50"
+              y="40"
+              width="1389"
+              height="698"
+              rx="169.5"
+              fill="url(#paint2_linear_107_6)"
+              fillOpacity="0.5"
+              stroke="url(#paint3_linear_107_6)"
+              strokeWidth="4"
+            />
+          </g>
+          {/* <path
             className=" animate-opactityLeft"
             opacity="0.45"
             d="M494.548 73.1794L264.96 26.8229C192.916 12.2765 121.889 55.917 102.31 126.759L19.5359 426.253C7.30047 470.523 17.558 517.979 46.985 553.244L128.928 651.444C162.519 691.7 215.789 709.813 266.957 698.376L493.181 647.814C503.206 645.574 513.446 644.443 523.718 644.443H956.002C966.154 644.443 976.277 645.548 986.19 647.737L1218.79 699.102C1268.77 710.137 1320.78 693.026 1354.44 654.478L1444.12 551.771C1474.13 517.4 1485.51 470.559 1474.61 426.25L1401.65 129.62C1383.9 57.4617 1312.87 11.741 1239.84 25.468L984.094 73.5393C975.567 75.1422 966.909 75.9488 958.232 75.9488H522.256C512.951 75.9488 503.669 75.0211 494.548 73.1794Z"
@@ -86,14 +114,15 @@ const FullDashboard = ({
               stroke-width="4"
               opacity={0.4}
             />
-          </g>
+          </g> */}
           <g id="clock">
             ‍<circle cx={1200} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.3} r={100} strokeWidth={6}></circle>‍
-            <circle cx={1200} cy={300} stroke={"url(#grad)"} opacity={0.3} r={100} strokeWidth={6}></circle>
+            <circle cx={1200} cy={300} stroke={"url(#grad)"} opacity={0.5} r={100} strokeWidth={6}></circle>
           </g>
-          <g id="clock">
-            ‍<circle cx={292} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.3} r={100} strokeWidth={6}></circle>‍
-            <circle cx={292} cy={300} stroke={"url(#grad)"} opacity={0.3} r={100} strokeWidth={6}></circle>
+          <g id="percent">
+            ‍<circle cx={322} cy={270} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>‍
+            <circle cx={262} cy={410} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>‍
+            <circle cx={322} cy={550} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>
           </g>
           <g id="speedBars">
             <RectSVG
@@ -130,31 +159,31 @@ const FullDashboard = ({
               speedBarX={speedBarX}
               speedBarY={speedBarY}
               height={getSpeed(speedArray, 5)}
-              fill="rgb(255,105,180, 0.45)"
+              fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 30}
               speedBarY={speedBarY}
               height={getSpeed(speedArray, 4)}
-              fill="rgb(255,105,180, 0.45)"
+              fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 60}
               speedBarY={speedBarY}
               height={getSpeed(speedArray, 3)}
-              fill="rgb(255,105,180, 0.45)"
+              fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 90}
               speedBarY={speedBarY}
               height={getSpeed(speedArray, 2)}
-              fill="rgb(255,105,180, 0.45)"
+              fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 120}
               speedBarY={speedBarY}
               height={getSpeed(speedArray, 1)}
-              fill="rgb(255,105,180, 0.45)"
+              fill={speedBarColor}
             />
           </g>
           <circle
@@ -196,7 +225,6 @@ const FullDashboard = ({
               style={{
                 transition: "stroke-dashoffset 0.5s ease-in-out",
               }}
-              // stroke="hotpink"
               strokeWidth={strokeWidth}
               strokeDasharray={dashArray}
               strokeDashoffset={percentage}
@@ -207,21 +235,33 @@ const FullDashboard = ({
               id="speed"
               className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest "
             >
-              {getNetWPM(typedChars.length, elapsedTime, errors).toFixed(0).padStart(3, "0")}
+              {wpm.toFixed(0).padStart(3, "0")}
             </div>
 
             <div
               id="clock"
-              className="absolute text-5xl left-[1200px] top-[300px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+              className="absolute text-6xl left-[1200px] top-[300px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
             >
               {timeRemaining.toFixed(0)}
             </div>
             <div
               id="accuracy"
-              className="absolute text-5xl left-[292px] top-[300px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+              className="absolute text-3xl left-[322px] top-[270px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
             >
               {accuracy}
               <span>%</span>
+            </div>
+            <div
+              id="accuracy"
+              className="absolute text-3xl left-[262px] top-[410px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            >
+              {typedChars.length}
+            </div>
+            <div
+              id="accuracy"
+              className="absolute text-3xl left-[322px] top-[550px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            >
+              {errors}
             </div>
           </foreignObject>
           <defs>
@@ -305,6 +345,51 @@ const FullDashboard = ({
               <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
               <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_10_2" />
             </filter>
+            {/* New Background */}
+            <linearGradient
+              id="paint0_linear_107_6"
+              x1="1555"
+              y1="379.5"
+              x2="790"
+              y2="476"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.0289673" stop-color="#1F1F1F" />
+              <stop offset="1" stop-color="#242424" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_107_6"
+              x1="1492"
+              y1="121"
+              x2="777.5"
+              y2="592"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.0829187" stop-color="#CC00FF" />
+              <stop offset="1" stop-color="#EB00FF" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_107_6"
+              x1="-260.5"
+              y1="531"
+              x2="332"
+              y2="295.5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#7C36B3" />
+              <stop offset="1" stop-color="#242424" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient
+              id="paint3_linear_107_6"
+              x1="-96.5"
+              y1="375.5"
+              x2="718.5"
+              y2="350"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.0829187" stop-color="#743DB9" />
+              <stop offset="1" stop-color="#EB00FF" stop-opacity="0" />
+            </linearGradient>
           </defs>
         </svg>
       </div>

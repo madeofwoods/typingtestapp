@@ -2,10 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext, GlobalContextType } from "../../context/GlobalContextProvider";
 import { demoWords } from "../../utils/utils";
 import { calculateErrors, getGrossWPM, getNetWPM } from "./utils";
-import Acceleration from "../Acceleration";
-import Speedometer from "../Speedometer";
-import SpeedometerTwo from "../SpeedometerTwo";
-import Dashboard from "../DashboardSVGs/Dashboard";
 import FullDashboard from "../DashboardSVGs/FullDashboard";
 
 const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
@@ -14,6 +10,11 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   const [errors, setErrors] = useState<number>(0);
   const [numberTyped, setNumberTyped] = useState<number[]>([]);
   const [speedArray, setSpeedArray] = useState<number[]>([0, 0, 0, 0, 0]);
+  const [liveWPM, setLiveWPM] = useState<number>(0);
+
+  useEffect(() => {
+    setLiveWPM(getNetWPM(typedChars.length, elapsedTime, errors));
+  }, [elapsedTime, typedChars, errors]);
 
   useEffect(() => {
     if (
@@ -28,7 +29,6 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
         counter > 4 ? numberTyped[counter - 6] : numberTyped[counter],
         numberChars
       );
-      console.log({ lettersToCheck, counter });
 
       let corr = 0;
       let err = 0;
@@ -43,15 +43,8 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     } else {
       setSpeedArray((prev) => [...prev, 0]);
     }
-    console.log(numberChars);
-    console.log(numberTyped[counter - 1]);
     setNumberTyped((prev) => [...prev, typedChars.length]);
-    console.log(numberTyped);
   }, [counter]);
-
-  // useEffect(() => {
-  //   console.log(speedArray);
-  // }, [speedArray]);
 
   const getAccuracy = (typedChars: string, errors: number): number => {
     const numberTyped: number = typedChars.length;
@@ -67,18 +60,10 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
 
     setErrors(calculateErrors(demoWords, typedChars));
-  }, [typedChars, startTime]);
+  }, [typedChars, startTime, timeRemaining]);
 
   return (
     <div className="">
-      {/* <div className="w-[700px] h-28 flex items-center justify-between">
-        <div className="border-2 border-slate-500 w-20 py-4 text-center">{numberChars}</div>
-        <div className="border-2 border-red-500 w-20 py-4 text-center text-red-400">{errors}</div>
-        <div className="border-2 border-purple-500 w-20 py-4 text-center text-purple-400">
-          {getNetWPM(typedChars.length, elapsedTime, errors)}
-        </div>
-        <div className="border-2 border-slate-500 w-20 py-4 text-center">{timeRemaining}</div>
-      </div> */}
       <div className=" w-[800px] h-[400px] mb-20">
         <FullDashboard
           typedChars={typedChars}
@@ -87,6 +72,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
           timeRemaining={timeRemaining}
           accuracy={getAccuracy(typedChars, errors)}
           speedArray={speedArray}
+          wpm={liveWPM}
         />
       </div>
     </div>

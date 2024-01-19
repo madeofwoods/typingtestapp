@@ -8,7 +8,7 @@ export type gameStateType = "start" | "run" | "finish";
 
 const Game = () => {
   const { gameState, setGameState } = useContext(GlobalContext) as GlobalContextType;
-  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(10);
+  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(20);
 
   useEffect(() => {
     timeRemaining == 0 && setGameState("finish");
