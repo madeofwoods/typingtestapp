@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext, GlobalContextType } from "../../context/GlobalContextProvider";
 import { demoWords } from "../../utils/utils";
 import { calculateErrors, getGrossWPM, getNetWPM } from "./utils";
-import FullDashboard from "../DashboardSVGs/FullDashboard";
+import FullDashboard from "../FullDashboard";
 
 const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
-  const { typedChars, numberChars, startTime } = useContext(GlobalContext) as GlobalContextType;
+  const { typedChars, numberChars, startTime, currentWords, allWords } = useContext(GlobalContext) as GlobalContextType;
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [errors, setErrors] = useState<number>(0);
   const [numberTyped, setNumberTyped] = useState<number[]>([]);
@@ -25,7 +25,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
         counter > 4
           ? typedChars.slice(numberTyped[counter - 6], numberChars)
           : typedChars.slice(numberTyped[counter], numberChars);
-      const correctLettersToCheck = demoWords.slice(
+      const correctLettersToCheck = allWords.slice(
         counter > 4 ? numberTyped[counter - 6] : numberTyped[counter],
         numberChars
       );
@@ -59,7 +59,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     const currentTime = new Date();
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
 
-    setErrors(calculateErrors(demoWords, typedChars));
+    setErrors(calculateErrors(allWords, typedChars));
   }, [typedChars, startTime, timeRemaining]);
 
   return (

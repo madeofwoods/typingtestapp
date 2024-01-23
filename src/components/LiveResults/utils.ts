@@ -12,3 +12,9 @@ export const calculateErrors = (actual: string, typed: string): number => {
     return prev;
   }, 0);
 };
+
+export const getSpeed = (speedArray: number[], index: number, speedBarHeight: number): number => {
+  const speed: number = speedArray[speedArray.length - index];
+  const adjustedSpeed: number = (speed * speedBarHeight) / 140;
+  return Math.min(Math.max(adjustedSpeed, 0), speedBarHeight);
+};

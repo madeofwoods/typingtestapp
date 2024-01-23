@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
-import { getNetWPM } from "../LiveResults/utils";
-import RectSVG from "../RectSVG";
+import { getNetWPM, getSpeed } from "./LiveResults/utils";
+import RectSVG from "./RectSVG";
+
+export type DashboardProps = {
+  typedChars: string;
+  elapsedTime: number;
+  errors: number;
+  timeRemaining: number;
+  accuracy: number;
+  speedArray: number[];
+  wpm: number;
+};
 
 const FullDashboard = ({
   typedChars,
@@ -10,15 +20,7 @@ const FullDashboard = ({
   accuracy,
   speedArray,
   wpm,
-}: {
-  typedChars: string;
-  elapsedTime: number;
-  errors: number;
-  timeRemaining: number;
-  accuracy: number;
-  speedArray: number[];
-  wpm: number;
-}) => {
+}: DashboardProps) => {
   const width: number = 800;
   const height: number = 500;
   const cx = -70;
@@ -35,12 +37,6 @@ const FullDashboard = ({
   const speedBarY = -600;
   const speedBarHeight = 90;
   const speedBarColor = "rgb(255,145,210, 0.55)";
-
-  const getSpeed = (speedArray: number[], index: number): number => {
-    const speed: number = speedArray[speedArray.length - index];
-    const adjustedSpeed: number = (speed * speedBarHeight) / 140;
-    return Math.min(Math.max(adjustedSpeed, 0), speedBarHeight);
-  };
 
   useEffect(() => {
     if (typedChars) {
@@ -158,31 +154,31 @@ const FullDashboard = ({
             <RectSVG
               speedBarX={speedBarX}
               speedBarY={speedBarY}
-              height={getSpeed(speedArray, 5)}
+              height={getSpeed(speedArray, 5, speedBarHeight)}
               fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 30}
               speedBarY={speedBarY}
-              height={getSpeed(speedArray, 4)}
+              height={getSpeed(speedArray, 4, speedBarHeight)}
               fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 60}
               speedBarY={speedBarY}
-              height={getSpeed(speedArray, 3)}
+              height={getSpeed(speedArray, 3, speedBarHeight)}
               fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 90}
               speedBarY={speedBarY}
-              height={getSpeed(speedArray, 2)}
+              height={getSpeed(speedArray, 2, speedBarHeight)}
               fill={speedBarColor}
             />
             <RectSVG
               speedBarX={speedBarX + 120}
               speedBarY={speedBarY}
-              height={getSpeed(speedArray, 1)}
+              height={getSpeed(speedArray, 1, speedBarHeight)}
               fill={speedBarColor}
             />
           </g>

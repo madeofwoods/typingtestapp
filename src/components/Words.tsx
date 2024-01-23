@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { demoWords, isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
 import classNames from "classnames";
 import { gameStateType } from "../pages/Game";
@@ -10,9 +10,10 @@ type WordsProps = {
 };
 
 const Words = ({ gameState, setGameState }: WordsProps) => {
-  const { typedChars, setTypedChars, numberChars, setNumberChars, setStartTime } = useContext(
+  const { typedChars, setTypedChars, setNumberChars, setStartTime, currentWords } = useContext(
     GlobalContext
   ) as GlobalContextType;
+  const [currentTyped, setCurrentTyped] = useState<string>("");
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
@@ -24,11 +25,13 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
       switch (e.key) {
         case "Backspace":
           setTypedChars((prev) => prev.slice(0, -1));
+          setCurrentTyped((prev) => prev.slice(0, -1));
           break;
         case "Shift":
           break;
         default:
           setTypedChars((prev) => prev + e.key);
+          setCurrentTyped((prev) => prev + e.key);
       }
     },
     [gameState, setGameState, setTypedChars, setStartTime]
@@ -46,24 +49,29 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
     setNumberChars(typedChars.length);
   }, [setNumberChars, typedChars]);
 
+  useEffect(() => {
+    setCurrentTyped("");
+    console.log(currentWords);
+  }, [currentWords]);
+
+  useEffect(() => {
+    console.log({ currentTyped, currentWords });
+  }, [currentTyped, currentWords]);
+
   return (
-    <div id="wordsContainer" className=" w-[800px] pl-[80px] mt-14">
-      <div className="text-2xl w-[720px] tracking-normal leading-relaxed whitespace-break-spaces">
-        {demoWords
+    <div id="wordsContainer" className=" w-[800px] pl-[40px] mt-14">
+      <div className="text-2xl w-[760px] tracking-normal leading-relaxed whitespace-break-spaces">
+        {currentWords
           .split("")
           .map((char) => (char === " " ? " " : char))
           .map((char, index) => (
             <span
               key={`${char}_${index}`}
               className={`${classNames({
-                "text-purple-500": isCorrect(char, index, typedChars, numberChars),
-                "text-pink-600": isIncorrect(char, index, typedChars, numberChars),
-                "bg-pink-600/50": isIncorrectSpace(char, index, typedChars, numberChars),
-                // " border-l-white border-l": index == numberChars,
-                // "border-l-red-100/0 border-l": index != numberChars,
-                // "animate-flash": index == numberChars,
-                "animate-caret": index == numberChars,
-                // "underline underline-offset-16": index == numberChars,
+                "text-purple-500": isCorrect(char, index, currentTyped, currentTyped.length),
+                "text-pink-600": isIncorrect(char, index, currentTyped, currentTyped.length),
+                "bg-pink-600/50": isIncorrectSpace(char, index, currentTyped, currentTyped.length),
+                "animate-caret": index == currentTyped.length,
               })} `}
             >
               {char}

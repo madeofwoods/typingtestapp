@@ -3,24 +3,34 @@ import LiveResults from "../components/LiveResults/LiveResults";
 import Words from "../components/Words";
 import useTimer from "../hooks/useTimer";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
+import { generateWords } from "../utils/utils";
 
 export type gameStateType = "start" | "run" | "finish";
 
 const Game = () => {
-  const { gameState, setGameState } = useContext(GlobalContext) as GlobalContextType;
-  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(20);
+  const wordsPerLevel: number = 15;
+  const { gameState, setGameState, setCurrentWords, currentWords, allWords, setAllWords, numberChars } = useContext(
+    GlobalContext
+  ) as GlobalContextType;
+  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(30);
+
+  useEffect(() => {
+    setAllWords((prev) => prev + currentWords);
+  }, [currentWords, setAllWords]);
+
+  useEffect(() => {
+    if (allWords.length == numberChars) {
+      setCurrentWords(generateWords(wordsPerLevel));
+    }
+  }, [numberChars, allWords, setCurrentWords]);
 
   useEffect(() => {
     timeRemaining == 0 && setGameState("finish");
-  }, [timeRemaining]);
-
-  useEffect(() => {
-    console.log("gameState", gameState);
-  }, [gameState]);
+  }, [timeRemaining, setGameState]);
 
   useEffect(() => {
     gameState === "run" && startTimer();
-    gameState === "finish";
+    // gameState === "finish";
   }, [gameState, resetTimer, startTimer]);
 
   return (
