@@ -239,7 +239,7 @@ const FullDashboard = ({
           <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative select-none ">
             <div
               onClick={() => setGameState("reset")}
-              className=" cursor-pointer text-gray-100/80 text-2xl top-[95px] translate-x-[-50%]  left-1/2 absolute w-34  bg-indigo-800/30 px-6 py-3 rounded-2xl flex items-center justify-center border-indigo-700 border-2 hover:border-indigo-400 hover:bg-indigo-700/30"
+              className=" cursor-pointer text-gray-100/80 text-2xl top-[95px] translate-x-[-50%]  left-1/2 absolute w-34  bg-indigo-800/30 px-6 py-3 rounded-2xl flex items-center justify-center border-violet-700 border-2 hover:border-violet-500 hover:bg-indigo-700/30"
             >
               <div className="">Restart</div>
             </div>

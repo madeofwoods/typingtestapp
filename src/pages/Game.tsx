@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import LiveResults from "../components/LiveResults/LiveResults";
 import Words from "../components/Words";
 import useTimer from "../hooks/useTimer";
@@ -39,7 +39,6 @@ const Game = () => {
     // gameState === "finish"
 
     if (gameState === "reset") {
-      console.log("reset");
       resetTimer();
       setAllWords("");
       setTypedChars("");

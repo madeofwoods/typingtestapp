@@ -5,12 +5,19 @@ import { calculateErrors, getGrossWPM, getNetWPM } from "./utils";
 import FullDashboard from "../FullDashboard";
 
 const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
-  const { typedChars, numberChars, startTime, currentWords, allWords } = useContext(GlobalContext) as GlobalContextType;
+  const { typedChars, numberChars, startTime, allWords, gameState } = useContext(GlobalContext) as GlobalContextType;
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [errors, setErrors] = useState<number>(0);
   const [numberTyped, setNumberTyped] = useState<number[]>([]);
   const [speedArray, setSpeedArray] = useState<number[]>([0, 0, 0, 0, 0]);
   const [liveWPM, setLiveWPM] = useState<number>(0);
+
+  useEffect(() => {
+    if (gameState == "reset") {
+      setNumberTyped([]);
+      setSpeedArray([0, 0, 0, 0, 0]);
+    }
+  }, [gameState]);
 
   useEffect(() => {
     setLiveWPM(getNetWPM(typedChars.length, elapsedTime, errors));
@@ -60,7 +67,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
 
     setErrors(calculateErrors(allWords, typedChars));
-  }, [typedChars, startTime, timeRemaining]);
+  }, [typedChars, startTime, timeRemaining, allWords]);
 
   return (
     <div className="">
