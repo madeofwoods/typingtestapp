@@ -1,8 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { demoWords, isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
 import classNames from "classnames";
-import { gameStateType } from "../pages/Game";
-import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
+import { GlobalContext, GlobalContextType, gameStateType } from "../context/GlobalContextProvider";
 
 type WordsProps = {
   gameState: gameStateType;
@@ -51,15 +50,10 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
 
   useEffect(() => {
     setCurrentTyped("");
-    console.log(currentWords);
   }, [currentWords]);
 
-  useEffect(() => {
-    console.log({ currentTyped, currentWords });
-  }, [currentTyped, currentWords]);
-
   return (
-    <div id="wordsContainer" className=" w-[800px] pl-[40px] mt-14">
+    <div id="wordsContainer" className=" w-[800px] pl-[40px] mt-14 select-none">
       <div className="text-2xl w-[760px] tracking-normal leading-relaxed whitespace-break-spaces">
         {currentWords
           .split("")

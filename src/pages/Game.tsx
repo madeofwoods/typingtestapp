@@ -5,13 +5,19 @@ import useTimer from "../hooks/useTimer";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 import { generateWords } from "../utils/utils";
 
-export type gameStateType = "start" | "run" | "finish";
-
 const Game = () => {
   const wordsPerLevel: number = 15;
-  const { gameState, setGameState, setCurrentWords, currentWords, allWords, setAllWords, numberChars } = useContext(
-    GlobalContext
-  ) as GlobalContextType;
+  const {
+    gameState,
+    setGameState,
+    setCurrentWords,
+    currentWords,
+    allWords,
+    setAllWords,
+    numberChars,
+    setTypedChars,
+    setNumberChars,
+  } = useContext(GlobalContext) as GlobalContextType;
   const { timeRemaining, startTimer, resetTimer, counter } = useTimer(30);
 
   useEffect(() => {
@@ -30,7 +36,16 @@ const Game = () => {
 
   useEffect(() => {
     gameState === "run" && startTimer();
-    // gameState === "finish";
+    // gameState === "finish"
+
+    if (gameState === "reset") {
+      console.log("reset");
+      resetTimer();
+      setAllWords("");
+      setTypedChars("");
+      setNumberChars(0);
+      setGameState("start");
+    }
   }, [gameState, resetTimer, startTimer]);
 
   return (

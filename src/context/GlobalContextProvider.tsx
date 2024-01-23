@@ -1,6 +1,6 @@
 import { createContext, useMemo, useState } from "react";
 
-export type gameStateType = "start" | "run" | "finish";
+export type gameStateType = "start" | "run" | "finish" | "reset";
 
 export type GlobalContextType = {
   typedChars: string;

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getNetWPM, getSpeed } from "./LiveResults/utils";
 import RectSVG from "./RectSVG";
+import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 
 export type DashboardProps = {
   typedChars: string;
@@ -21,12 +22,13 @@ const FullDashboard = ({
   speedArray,
   wpm,
 }: DashboardProps) => {
+  const { setGameState } = useContext(GlobalContext) as GlobalContextType;
+  const [percentage, setPercentage] = useState<number>(942.47);
   const width: number = 800;
   const height: number = 500;
   const cx = -70;
   const cy = -380;
   const translation = "5 -95";
-  const [percentage, setPercentage] = useState<number>(942.47);
   const radius: number = 200;
   const strokeWidth = radius * 0.34;
   const innerRadius = radius;
@@ -120,6 +122,13 @@ const FullDashboard = ({
             <circle cx={262} cy={410} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>‍
             <circle cx={322} cy={550} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>
           </g>
+          {/* <path
+            x={100}
+            y={100}
+            transform="scale(3) translate(250, 20)"
+            fill="white"
+            d="M15.88 13.84c-1.68-3.48-5.44-5.24-9.040-4.6l0.96-1.8c0.24-0.4 0.080-0.92-0.32-1.12-0.4-0.24-0.92-0.080-1.12 0.32l-1.96 3.64c0 0-0.44 0.72 0.24 1.040l3.64 1.96c0.12 0.080 0.28 0.12 0.4 0.12 0.28 0 0.6-0.16 0.72-0.44 0.24-0.4 0.080-0.92-0.32-1.12l-1.88-1.040c2.84-0.48 5.8 0.96 7.12 3.68 1.6 3.32 0.2 7.32-3.12 8.88-1.6 0.76-3.4 0.88-5.080 0.28s-3.040-1.8-3.8-3.4c-0.76-1.6-0.88-3.4-0.28-5.080 0.16-0.44-0.080-0.92-0.52-1.080-0.4-0.080-0.88 0.16-1.040 0.6-0.72 2.12-0.6 4.36 0.36 6.36s2.64 3.52 4.76 4.28c0.92 0.32 1.84 0.48 2.76 0.48 1.24 0 2.48-0.28 3.6-0.84 4.16-2 5.92-7 3.92-11.12z"
+          ></path> */}
           <g id="speedBars">
             <RectSVG
               speedBarX={speedBarX}
@@ -182,6 +191,7 @@ const FullDashboard = ({
               fill={speedBarColor}
             />
           </g>
+          {/* <rect x={1492 / 2 - 100} y={80} width={200} height={60} fill="rgb(30,30,30)" /> */}
           <circle
             cx={cx}
             cy={cy}
@@ -226,7 +236,13 @@ const FullDashboard = ({
               strokeDashoffset={percentage}
             />
           </g>
-          <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative">
+          <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative select-none ">
+            <div
+              onClick={() => setGameState("reset")}
+              className=" cursor-pointer text-gray-100/80 text-2xl top-[95px] translate-x-[-50%]  left-1/2 absolute w-34  bg-indigo-800/30 px-6 py-3 rounded-2xl flex items-center justify-center border-indigo-700 border-2 hover:border-indigo-400 hover:bg-indigo-700/30"
+            >
+              <div className="">Restart</div>
+            </div>
             <div
               id="speed"
               className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest "
