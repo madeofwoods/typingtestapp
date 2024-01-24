@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext, GlobalContextType } from "../../context/GlobalContextProvider";
-import { demoWords } from "../../utils/utils";
-import { calculateErrors, getGrossWPM, getNetWPM } from "./utils";
+import { calculateErrors, getAccuracy, getGrossWPM, getNetWPM } from "./utils";
 import FullDashboard from "../FullDashboard";
 
 const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
@@ -53,15 +52,6 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     setNumberTyped((prev) => [...prev, typedChars.length]);
   }, [counter]);
 
-  const getAccuracy = (typedChars: string, errors: number): number => {
-    const numberTyped: number = typedChars.length;
-    if (numberTyped == 0) return 0;
-    if (errors == 0) return 100;
-    else {
-      return Math.round(((numberTyped - errors) / numberTyped) * 100);
-    }
-  };
-
   useEffect(() => {
     const currentTime = new Date();
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
@@ -70,19 +60,19 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   }, [typedChars, startTime, timeRemaining, allWords]);
 
   return (
-    <div className="">
-      <div className=" w-[800px] h-[400px] mb-20">
-        <FullDashboard
-          typedChars={typedChars}
-          elapsedTime={elapsedTime}
-          errors={errors}
-          timeRemaining={timeRemaining}
-          accuracy={getAccuracy(typedChars, errors)}
-          speedArray={speedArray}
-          wpm={liveWPM}
-        />
-      </div>
+    // <div className=" bg-indigo-900/40">
+    <div className=" w-[800px] h-[400px] mb-0 ">
+      <FullDashboard
+        typedChars={typedChars}
+        elapsedTime={elapsedTime}
+        errors={errors}
+        timeRemaining={timeRemaining}
+        accuracy={getAccuracy(typedChars, errors)}
+        speedArray={speedArray}
+        wpm={liveWPM}
+      />
     </div>
+    // </div>
   );
 };
 

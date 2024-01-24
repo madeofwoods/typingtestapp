@@ -8,8 +8,8 @@ type WordsProps = {
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
 };
 
-const Words = ({ gameState, setGameState }: WordsProps) => {
-  const { typedChars, setTypedChars, setNumberChars, setStartTime, currentWords } = useContext(
+const Words = () => {
+  const { typedChars, setTypedChars, setNumberChars, setStartTime, currentWords, gameState, setGameState } = useContext(
     GlobalContext
   ) as GlobalContextType;
   const [currentTyped, setCurrentTyped] = useState<string>("");
@@ -53,7 +53,7 @@ const Words = ({ gameState, setGameState }: WordsProps) => {
   }, [currentWords]);
 
   return (
-    <div id="wordsContainer" className=" w-[800px] pl-[40px] mt-14 select-none">
+    <div id="wordsContainer" className=" w-[800px] pl-[40px] select-none">
       <div className="text-2xl w-[760px] tracking-normal leading-relaxed whitespace-break-spaces">
         {currentWords
           .split("")

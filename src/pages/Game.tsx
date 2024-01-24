@@ -6,7 +6,7 @@ import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvid
 import { generateWords } from "../utils/utils";
 
 const Game = () => {
-  const wordsPerLevel: number = 15;
+  const wordsPerLevel: number = 20;
   const {
     gameState,
     setGameState,
@@ -45,12 +45,12 @@ const Game = () => {
       setNumberChars(0);
       setGameState("start");
     }
-  }, [gameState, resetTimer, startTimer]);
+  }, [gameState, resetTimer, startTimer, setAllWords, setNumberChars, setGameState, setTypedChars]);
 
   return (
-    <div className="bg-black w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col">
+    <div className="bg-black w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col gap-14">
       <LiveResults timeRemaining={timeRemaining} counter={counter} />
-      <Words gameState={gameState} setGameState={setGameState} />
+      <Words />
     </div>
   );
 };

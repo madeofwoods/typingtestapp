@@ -18,3 +18,12 @@ export const getSpeed = (speedArray: number[], index: number, speedBarHeight: nu
   const adjustedSpeed: number = (speed * speedBarHeight) / 140;
   return Math.min(Math.max(adjustedSpeed, 0), speedBarHeight);
 };
+
+export const getAccuracy = (typedChars: string, errors: number): number => {
+  const numberTyped: number = typedChars.length;
+  if (numberTyped == 0) return 0;
+  if (errors == 0) return 100;
+  else {
+    return Math.round(((numberTyped - errors) / numberTyped) * 100);
+  }
+};
