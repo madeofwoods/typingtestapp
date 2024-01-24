@@ -53,8 +53,8 @@ const Words = () => {
   }, [currentWords]);
 
   return (
-    <div id="wordsContainer" className=" w-[800px] pl-[40px] select-none">
-      <div className="text-2xl w-[760px] tracking-normal leading-relaxed whitespace-break-spaces">
+    <div id="wordsContainer" className=" w-[800px]  select-none min-h-[200px]">
+      <div className="text-[1.4rem] w-[800px] tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/10 pl-[40px] pr-[20px] py-5 rounded-3xl min-h-[185px]">
         {currentWords
           .split("")
           .map((char) => (char === " " ? " " : char))

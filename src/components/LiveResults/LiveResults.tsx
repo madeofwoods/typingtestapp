@@ -61,7 +61,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
 
   return (
     // <div className=" bg-indigo-900/40">
-    <div className=" w-[800px] h-[400px] mb-0 ">
+    <div className=" w-[800px] h-[400px] mb-0">
       <FullDashboard
         typedChars={typedChars}
         elapsedTime={elapsedTime}

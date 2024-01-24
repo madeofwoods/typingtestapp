@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { getNetWPM, getSpeed } from "./LiveResults/utils";
 import RectSVG from "./RectSVG";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
+import image from "../assets/undo-arrow.png";
 
 export type DashboardProps = {
   typedChars: string;
@@ -22,8 +23,9 @@ const FullDashboard = ({
   speedArray,
   wpm,
 }: DashboardProps) => {
-  const { setGameState } = useContext(GlobalContext) as GlobalContextType;
+  const { setGameState, gameState } = useContext(GlobalContext) as GlobalContextType;
   const [percentage, setPercentage] = useState<number>(942.47);
+  const [labelsActive, setLabelsActive] = useState<boolean>(false);
   const width: number = 800;
   const height: number = 400;
   const cx = -70;
@@ -35,7 +37,7 @@ const FullDashboard = ({
   const circumference = 2 * Math.PI * innerRadius;
   const arc = (circumference * 270) / 360;
   const dashArray = `${arc} ${circumference}`;
-  const speedBarX = 1110;
+  const speedBarX = 1100;
   const speedBarY = -600;
   const speedBarHeight = 90;
   const speedBarColor = "rgb(255,145,210, 0.70)";
@@ -47,7 +49,7 @@ const FullDashboard = ({
       const offset = arc - (percentNormalized / 100) * arc;
 
       setPercentage(offset);
-    }
+    } else setPercentage(arc);
   }, [typedChars, elapsedTime, errors, arc]);
 
   return (
@@ -113,13 +115,26 @@ const FullDashboard = ({
             />
           </g> */}
         <g id="clock">
-          ‍<circle cx={1200} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.3} r={100} strokeWidth={6}></circle>‍
-          <circle cx={1200} cy={300} stroke={"url(#grad)"} opacity={0.5} r={100} strokeWidth={6}></circle>
+          ‍<circle cx={1200} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.35} r={100} strokeWidth={6}></circle>‍
+          <circle
+            style={{
+              transition: "stroke-dashoffset 1s linear",
+            }}
+            cx={1200}
+            cy={300}
+            stroke={"url(#grad)"}
+            opacity={0.5}
+            r={100}
+            strokeWidth={6}
+            strokeDasharray={628}
+            strokeDashoffset={628 - (628 * timeRemaining) / 30}
+            transform="rotate(270 1200 300)"
+          ></circle>
         </g>
         <g id="percent">
-          ‍<circle cx={322} cy={270} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>‍
-          <circle cx={262} cy={410} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>‍
-          <circle cx={322} cy={550} stroke={"url(#grad)"} opacity={0.5} r={60} strokeWidth={6}></circle>
+          ‍<circle cx={292} cy={270} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>‍
+          <circle cx={292} cy={410} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>‍
+          <circle cx={292} cy={550} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>
         </g>
         <g id="speedBars">
           <RectSVG
@@ -183,7 +198,6 @@ const FullDashboard = ({
             fill={speedBarColor}
           />
         </g>
-        {/* <rect x={1492 / 2 - 100} y={80} width={200} height={60} fill="rgb(30,30,30)" /> */}
         <circle
           cx={cx}
           cy={cy}
@@ -231,9 +245,9 @@ const FullDashboard = ({
         <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative select-none ">
           <div
             onClick={() => setGameState("reset")}
-            className=" cursor-pointer text-gray-100/80 text-2xl top-[95px] translate-x-[-50%]  left-1/2 absolute w-34  bg-indigo-800/30 px-6 py-3 rounded-2xl flex items-center justify-center border-violet-700 border-2 hover:border-violet-500 hover:bg-indigo-700/30"
+            className=" cursor-pointer text-gray-100/80 text-2xl top-[95px] translate-x-[-50%]  left-[780px] absolute bg-indigo-800/30 w-14 h-14 rounded-lg flex items-center justify-center border-violet-700 border-2 hover:border-violet-500 hover:bg-indigo-700/30"
           >
-            <div className="">Restart</div>
+            <img src={image} width={30} height={30} className=" invert-[60%]" />
           </div>
           <div
             id="speed"
@@ -249,23 +263,70 @@ const FullDashboard = ({
             {timeRemaining.toFixed(0)}
           </div>
           <div
+            onMouseEnter={() => setLabelsActive(true)}
+            onMouseLeave={() => setLabelsActive(false)}
+            // onClick={() => setLabelsActive(!labelsActive)}
+            className=" absolute left-[680px] top-[95px] w-14 h-14 bg-indigo-900/30  border-violet-700 border-2 hover:border-violet-500 hover:bg-indigo-700/30 rounded-lg text-3xl flex items-center justify-center font-light text-gray-300/80 hover:text-gray-300 cursor-pointer"
+          >
+            ?
+          </div>
+          {/* LABELS */}
+          <div
+            className={`absolute text-xl max-w-40 left-[370px] top-[270px]  translate-y-[-50%] px-4 py-2 rounded-lg bg-indigo-800/30 border border-indigo-400 text-gray-300 opacity-75 transition-opacity ${
+              labelsActive ? "opacity-75" : "opacity-0"
+            }`}
+          >
+            Accuracy
+          </div>
+          <div
+            className={`absolute text-xl max-w-40 left-[370px] top-[410px]  translate-y-[-50%] px-4 py-2 rounded-lg bg-indigo-800/30 border border-indigo-400 text-gray-300 opacity-75 transition-opacity  ${
+              labelsActive ? "opacity-75" : "opacity-0"
+            }`}
+          >
+            Chars.
+          </div>
+          <div
+            className={`absolute text-xl max-w-40 left-[370px] top-[550px]  translate-y-[-50%] px-4 py-2 rounded-lg bg-indigo-800/30 border border-indigo-400 text-gray-300 opacity-75  transition-opacity ${
+              labelsActive ? "opacity-75" : "opacity-0"
+            }`}
+          >
+            Errors
+          </div>
+          <div
+            className={`absolute text-xl max-w-40 left-[1320px] top-[300px]  translate-y-[-50%] px-4 py-2 rounded-lg bg-indigo-800/30 border border-indigo-400 text-gray-300 opacity-75 transition-opacity  ${
+              labelsActive ? "opacity-75" : "opacity-0"
+            }`}
+          >
+            Time
+          </div>
+          <div
+            className={`absolute text-xl max-w-40 left-[1300px] top-[555px]  translate-y-[-50%] px-4 py-2 rounded-lg bg-indigo-800/30 border border-indigo-400 text-gray-300 opacity-75  transition-opacity  ${
+              labelsActive ? "opacity-75" : "opacity-0"
+            }`}
+          >
+            Speed
+          </div>
+          <div
             id="accuracy"
-            className="absolute text-3xl left-[322px] top-[270px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            className="absolute text-3xl left-[292px] top-[270px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
           >
             {accuracy}
             <span>%</span>
           </div>
           <div
-            id="accuracy"
-            className="absolute text-3xl left-[262px] top-[410px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            id="chars"
+            className="absolute text-3xl left-[292px] top-[410px] translate-x-[-50%] translate-y-[-50%] text-violet-400/70  "
           >
             {typedChars.length}
           </div>
           <div
-            id="accuracy"
-            className="absolute text-3xl left-[322px] top-[550px] translate-x-[-50%] translate-y-[-50%] text-white/70  "
+            id="errors"
+            className="absolute text-3xl left-[292px] top-[550px] translate-x-[-50%] translate-y-[-50%] text-pink-600/70  "
           >
             {errors}
+          </div>
+          <div className=" absolute text-gray-400 text-3xl tracking-widest left-1/2 translate-x-[-50%] top-[580px]">
+            WPM
           </div>
         </foreignObject>
         <defs>
@@ -340,9 +401,19 @@ const FullDashboard = ({
             <stop offset="0.841638" stopColor="white" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0.0408604" stopColor="#F06565" />
+            <stop offset="0.0408604" stopColor="#dc4eff" />
             <stop offset="0.436563" stopColor="#DD2FCD" />
             <stop offset="1" stopColor="#3827FF" />
+          </linearGradient>
+          <linearGradient id="accGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0.0408604" stopColor="#e6deff" />
+            <stop offset="0.436563" stopColor="#a795cb" />
+            <stop offset="1" stopColor="#dec5ff" />
+          </linearGradient>
+          <linearGradient id="errorGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0.0408604" stopColor="#e65151" />
+            <stop offset="0.436563" stopColor="#dd402f" />
+            <stop offset="1" stopColor="#ff0000" />
           </linearGradient>
           <filter id="f1" x="0" y="0" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
@@ -394,6 +465,23 @@ const FullDashboard = ({
             <stop offset="0.0829187" stop-color="#743DB9" />
             <stop offset="1" stop-color="#EB00FF" stop-opacity="0" />
           </linearGradient>
+          {/* Dashboard Lights */}
+
+          <linearGradient id="paint0_linear_16_23" x1="37" y1="39" x2="-6.5" y2="20" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#110E1E" />
+            <stop offset="1" stopColor="#73548B" stopOpacity="0.73" />
+          </linearGradient>
+          <radialGradient
+            id="paint1_radial_16_23"
+            cx="0"
+            cy="0"
+            r="1"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(17 3.5) rotate(60.9454) scale(20.5913 33.6324)"
+          >
+            <stop stopColor="#955FCB" />
+            <stop offset="1" stopColor="#4E2189" />
+          </radialGradient>
         </defs>
       </svg>
     </div>

@@ -48,9 +48,14 @@ const Game = () => {
   }, [gameState, resetTimer, startTimer, setAllWords, setNumberChars, setGameState, setTypedChars]);
 
   return (
-    <div className="bg-black w-screen h-screen flex items-center justify-center text-gray-300 font-mono flex-col gap-14">
-      <LiveResults timeRemaining={timeRemaining} counter={counter} />
-      <Words />
+    <div className="bg-black w-screen h-screen items-center  text-gray-300 font-mono">
+      <div className="w-full h-[120px] flex items-center justify-center text-4xl tracking-widest text-white font-sans">
+        TYPE TEST
+      </div>
+      <div className="flex items-center w-full h-[calc(100%-120px)] mt-16 flex-col gap-20">
+        <LiveResults timeRemaining={timeRemaining} counter={counter} />
+        <Words />
+      </div>
     </div>
   );
 };
