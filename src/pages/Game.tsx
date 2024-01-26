@@ -4,7 +4,6 @@ import Words from "../components/Words";
 import useTimer from "../hooks/useTimer";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 import { generateWords } from "../utils/utils";
-import LogoSVG from "../components/LogoSVG";
 import Navbar from "../components/Navbar";
 
 const Game = () => {
