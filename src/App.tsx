@@ -1,10 +1,10 @@
 import "./App.css";
-import Words from "./components/Words";
+import Game from "./pages/Game";
 
 const App = () => {
   return (
     <div className="app">
-      <Words />
+      <Game />
     </div>
   );
 };
