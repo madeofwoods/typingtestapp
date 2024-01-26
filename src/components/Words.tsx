@@ -1,12 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { demoWords, isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
+import { isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
 import classNames from "classnames";
-import { GlobalContext, GlobalContextType, gameStateType } from "../context/GlobalContextProvider";
-
-type WordsProps = {
-  gameState: gameStateType;
-  setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
-};
+import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 
 const Words = () => {
   const { typedChars, setTypedChars, setNumberChars, setStartTime, currentWords, gameState, setGameState } = useContext(
