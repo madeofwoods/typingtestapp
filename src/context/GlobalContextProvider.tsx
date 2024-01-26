@@ -1,6 +1,7 @@
 import { createContext, useMemo, useState } from "react";
 
 export type gameStateType = "start" | "run" | "finish" | "reset";
+export type dashboardType = 1 | 2;
 
 export type GlobalContextType = {
   typedChars: string;
@@ -15,6 +16,10 @@ export type GlobalContextType = {
   setCurrentWords: React.Dispatch<React.SetStateAction<string>>;
   allWords: string;
   setAllWords: React.Dispatch<React.SetStateAction<string>>;
+  gameLength: number;
+  setGameLength: React.Dispatch<React.SetStateAction<number>>;
+  dashboard: dashboardType;
+  setDashboard: React.Dispatch<React.SetStateAction<dashboardType>>;
 };
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
@@ -26,6 +31,8 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [startTime, setStartTime] = useState<Date>(new Date());
   const [currentWords, setCurrentWords] = useState<string>("");
   const [allWords, setAllWords] = useState<string>("");
+  const [gameLength, setGameLength] = useState<number>(30);
+  const [dashboard, setDashboard] = useState<dashboardType>(1);
 
   const store = useMemo(
     () => ({
@@ -41,8 +48,12 @@ const GlobalContextProvider = ({ children }: { children: React.ReactNode }) => {
       setCurrentWords,
       allWords,
       setAllWords,
+      gameLength,
+      setGameLength,
+      dashboard,
+      setDashboard,
     }),
-    [typedChars, numberChars, gameState, startTime, currentWords, allWords]
+    [typedChars, numberChars, gameState, startTime, currentWords, allWords, gameLength, dashboard]
   );
   return <GlobalContext.Provider value={store}>{children}</GlobalContext.Provider>;
 };

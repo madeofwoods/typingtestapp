@@ -4,6 +4,8 @@ import Words from "../components/Words";
 import useTimer from "../hooks/useTimer";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 import { generateWords } from "../utils/utils";
+import LogoSVG from "../components/LogoSVG";
+import Navbar from "../components/Navbar";
 
 const Game = () => {
   const wordsPerLevel: number = 20;
@@ -17,8 +19,14 @@ const Game = () => {
     numberChars,
     setTypedChars,
     setNumberChars,
+    gameLength,
   } = useContext(GlobalContext) as GlobalContextType;
-  const { timeRemaining, startTimer, resetTimer, counter } = useTimer(30);
+  const { timeRemaining, startTimer, resetTimer, counter, setTimeLeft } = useTimer(gameLength);
+
+  useEffect(() => {
+    resetTimer();
+    setTimeLeft(gameLength);
+  }, [gameLength, setTimeLeft]);
 
   useEffect(() => {
     setAllWords((prev) => prev + currentWords);
@@ -49,10 +57,8 @@ const Game = () => {
 
   return (
     <div className="bg-black w-screen h-screen items-center  text-gray-300 font-mono">
-      <div className="w-full h-[120px] flex items-center justify-center text-4xl tracking-widest text-white font-sans">
-        TYPE TEST
-      </div>
-      <div className="flex items-center w-full h-[calc(100%-120px)] mt-16 flex-col gap-20">
+      <Navbar />
+      <div className="flex items-center justify-evenly w-full h-[calc(100%-120px)] flex-col gap-10 ">
         <LiveResults timeRemaining={timeRemaining} counter={counter} />
         <Words />
       </div>

@@ -40,7 +40,7 @@ const useTimer = (seconds: number) => {
     }
   }, [timeRemaining, intervalRef]);
 
-  return { timeRemaining, startTimer, resetTimer, counter };
+  return { timeRemaining, startTimer, resetTimer, counter, setTimeLeft };
 };
 
 export default useTimer;
