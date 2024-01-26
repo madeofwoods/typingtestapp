@@ -3,8 +3,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const useTimer = (seconds: number) => {
   const [timeRemaining, setTimeLeft] = useState(seconds);
   const [counter, setCounter] = useState(0);
-  const intervalRef = useRef<NodeJS.Timer | null>(null);
-  const milisecondsRef = useRef<NodeJS.Timer | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const milisecondsRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startTimer = useCallback(() => {
     console.log("starting timer");
