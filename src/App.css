@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+html {
+  background-color: black;
+}
+
 .app {
   background-color: rgb(34, 38, 52);
   width: 100vw;

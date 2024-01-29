@@ -11,6 +11,10 @@ export const generateWords = (count: number): string => {
   return output;
 };
 
+export const isKeyboardCodeAllowed = (code: string) => {
+  return code.startsWith("Key") || code === "Backspace" || code === "Space" || code == "Minus";
+};
+
 export const isCorrect = (char: string, index: number, typedChars: string, numberChars: number): boolean => {
   return index < numberChars && char === typedChars[index] && char != " ";
 };

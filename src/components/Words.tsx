@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { isCorrect, isIncorrect, isIncorrectSpace } from "../utils/utils";
+import { isCorrect, isIncorrect, isIncorrectSpace, isKeyboardCodeAllowed } from "../utils/utils";
 import classNames from "classnames";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 
@@ -16,6 +16,11 @@ const Words = () => {
         setGameState("run");
         setStartTime(new Date());
       }
+      if (!isKeyboardCodeAllowed(e.code)) {
+        console.log(e.code);
+        return;
+      }
+
       switch (e.key) {
         case "Backspace":
           setTypedChars((prev) => prev.slice(0, -1));
@@ -49,7 +54,7 @@ const Words = () => {
 
   return (
     <div id="wordsContainer" className=" w-[800px]  select-none min-h-[200px]">
-      <div className="text-[1.4rem] w-[800px] tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/10 pl-[40px] pr-[20px] py-5 rounded-3xl min-h-[185px]">
+      <div className="text-[1.4rem] w-[800px] tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
         {currentWords
           .split("")
           .map((char) => (char === " " ? " " : char))
