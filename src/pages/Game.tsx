@@ -25,7 +25,7 @@ const Game = () => {
   useEffect(() => {
     resetTimer();
     setTimeLeft(gameLength);
-  }, [gameLength, setTimeLeft]);
+  }, [gameLength, setTimeLeft, resetTimer]);
 
   useEffect(() => {
     setAllWords((prev) => prev + currentWords);
@@ -43,7 +43,6 @@ const Game = () => {
 
   useEffect(() => {
     gameState === "run" && startTimer();
-    // gameState === "finish"
 
     if (gameState === "reset") {
       resetTimer();

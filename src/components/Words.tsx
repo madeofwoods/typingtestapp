@@ -16,8 +16,8 @@ const Words = () => {
         setGameState("run");
         setStartTime(new Date());
       }
+      //only allow certain keys
       if (!isKeyboardCodeAllowed(e.code)) {
-        console.log(e.code);
         return;
       }
 
@@ -53,7 +53,7 @@ const Words = () => {
   }, [currentWords]);
 
   return (
-    <div id="wordsContainer" className=" w-[800px]  select-none min-h-[200px]">
+    <div id="wordsContainer" className=" w-[800px]  select-none min-h-[230px]">
       <div className="text-[1.4rem] w-[800px] tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
         {currentWords
           .split("")
