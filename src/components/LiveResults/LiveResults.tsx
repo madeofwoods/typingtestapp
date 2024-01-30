@@ -12,16 +12,17 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   const [liveWPM, setLiveWPM] = useState<number>(0);
 
   useEffect(() => {
+    setLiveWPM(getNetWPM(typedChars.length, elapsedTime, errors));
+  }, [elapsedTime, typedChars, errors]);
+
+  useEffect(() => {
     if (gameState == "reset") {
       setNumberTyped([]);
       setSpeedArray([0, 0, 0, 0, 0]);
     }
   }, [gameState]);
 
-  useEffect(() => {
-    setLiveWPM(getNetWPM(typedChars.length, elapsedTime, errors));
-  }, [elapsedTime, typedChars, errors]);
-
+  // updating and storing the speed over the last second, updating every 0.2s (counter)
   useEffect(() => {
     if (
       (counter > 5 && numberChars >= numberTyped[counter - 6]) ||
@@ -52,6 +53,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     setNumberTyped((prev) => [...prev, typedChars.length]);
   }, [counter]);
 
+  //calculte an accurate length of time that the game has been running
   useEffect(() => {
     const currentTime = new Date();
     setElapsedTime((currentTime.getTime() - startTime.getTime()) / 1000);
@@ -60,7 +62,6 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   }, [typedChars, startTime, timeRemaining, allWords]);
 
   return (
-    // <div className=" bg-indigo-900/40">
     <div className=" w-[800px] h-[400px] mb-0">
       <FullDashboard
         typedChars={typedChars}
@@ -72,7 +73,6 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
         wpm={liveWPM}
       />
     </div>
-    // </div>
   );
 };
 

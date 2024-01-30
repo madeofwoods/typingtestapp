@@ -1,4 +1,4 @@
-import LogoSVG from "./LogoSVG";
+import LogoSVG from "./SVGComponents/LogoSVG";
 import OptionsMenu from "./OptionsMenu";
 
 const Navbar = () => {

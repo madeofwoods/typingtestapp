@@ -1,18 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { getNetWPM, getSpeed } from "./LiveResults/utils";
-import RectSVG from "./RectSVG";
+import RectSVG from "./SVGComponents/RectSVG";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
 import image from "../assets/undo-arrow.png";
-
-export type DashboardProps = {
-  typedChars: string;
-  elapsedTime: number;
-  errors: number;
-  timeRemaining: number;
-  accuracy: number;
-  speedArray: number[];
-  wpm: number;
-};
+import { DashboardProps } from "../lib/types";
+import SkinOneSVG from "./SVGComponents/SkinOneSVG";
+import SkinTwoSVG from "./SVGComponents/SkinTwoSVG";
+import ClockSVG from "./SVGComponents/ClockSVG";
+import SpeedBarsSVG from "./SVGComponents/SpeedBarsSVG";
 
 const FullDashboard = ({
   typedChars,
@@ -26,6 +21,7 @@ const FullDashboard = ({
   const { setGameState, gameLength, dashboard } = useContext(GlobalContext) as GlobalContextType;
   const [percentage, setPercentage] = useState<number>(942.47);
   const [labelsActive, setLabelsActive] = useState<boolean>(false);
+
   const width: number = 800;
   const height: number = 400;
   const cx = -70;
@@ -37,11 +33,8 @@ const FullDashboard = ({
   const circumference = 2 * Math.PI * innerRadius;
   const arc = (circumference * 270) / 360;
   const dashArray = `${arc} ${circumference}`;
-  const speedBarX = 1100;
-  const speedBarY = -600;
-  const speedBarHeight = 90;
-  const speedBarColor = "rgb(255,145,210, 0.70)";
 
+  //update WPM speedometer
   useEffect(() => {
     if (typedChars) {
       const speed = getNetWPM(typedChars.length, elapsedTime, errors);
@@ -54,156 +47,16 @@ const FullDashboard = ({
 
   return (
     <div className={` relative flex justify-center items-center `}>
-      {" "}
       <svg width={width} height={height} viewBox="0 0 1492 717" className=" ">
-        {/* BG2 */}
-        {dashboard === 1 ? (
-          <g>
-            <rect
-              x="50"
-              y="10"
-              width="1389"
-              height="698"
-              rx="169.5"
-              fill="url(#paint0_linear_107_6)"
-              fillOpacity="0.7"
-              stroke="url(#paint1_linear_107_6)"
-              strokeWidth="4"
-            />
-            <rect
-              x="50"
-              y="10"
-              width="1389"
-              height="698"
-              rx="169.5"
-              fill="url(#paint2_linear_107_6)"
-              fillOpacity="0.5"
-              stroke="url(#paint3_linear_107_6)"
-              strokeWidth="4"
-            />
-          </g>
-        ) : (
-          <g>
-            <path
-              className=" animate-opactityLeft"
-              opacity="0.45"
-              d="M494.548 73.1794L264.96 26.8229C192.916 12.2765 121.889 55.917 102.31 126.759L19.5359 426.253C7.30047 470.523 17.558 517.979 46.985 553.244L128.928 651.444C162.519 691.7 215.789 709.813 266.957 698.376L493.181 647.814C503.206 645.574 513.446 644.443 523.718 644.443H956.002C966.154 644.443 976.277 645.548 986.19 647.737L1218.79 699.102C1268.77 710.137 1320.78 693.026 1354.44 654.478L1444.12 551.771C1474.13 517.4 1485.51 470.559 1474.61 426.25L1401.65 129.62C1383.9 57.4617 1312.87 11.741 1239.84 25.468L984.094 73.5393C975.567 75.1422 966.909 75.9488 958.232 75.9488H522.256C512.951 75.9488 503.669 75.0211 494.548 73.1794Z"
-              fill="url(#paint0_linear_102_8)"
-              stroke="url(#paint1_linear_102_8)"
-              strokeWidth="7"
-            />
-            <g opacity="0.3" filter="url(#filter0_b_102_8)" className=" animate-opactityRight">
-              <path
-                d="M494.548 72.1794L264.96 25.8229C192.916 11.2765 121.889 54.917 102.31 125.759L19.5359 425.253C7.30048 469.523 17.558 516.979 46.985 552.244L128.928 650.444C162.519 690.7 215.789 708.813 266.957 697.376L493.181 646.814C503.206 644.574 513.446 643.443 523.718 643.443H956.002C966.154 643.443 976.277 644.548 986.19 646.737L1218.79 698.102C1268.77 709.137 1320.78 692.026 1354.44 653.478L1444.12 550.771C1474.13 516.4 1485.51 469.559 1474.61 425.25L1401.65 128.62C1383.9 56.4617 1312.87 10.741 1239.84 24.468L984.094 72.5393C975.567 74.1422 966.909 74.9488 958.232 74.9488H522.256C512.951 74.9488 503.669 74.0211 494.548 72.1794Z"
-                fill="url(#paint2_linear_102_8)"
-                fillOpacity="0.7"
-              />
-              <path
-                d="M494.548 72.1794L264.96 25.8229C192.916 11.2765 121.889 54.917 102.31 125.759L19.5359 425.253C7.30048 469.523 17.558 516.979 46.985 552.244L128.928 650.444C162.519 690.7 215.789 708.813 266.957 697.376L493.181 646.814C503.206 644.574 513.446 643.443 523.718 643.443H956.002C966.154 643.443 976.277 644.548 986.19 646.737L1218.79 698.102C1268.77 709.137 1320.78 692.026 1354.44 653.478L1444.12 550.771C1474.13 516.4 1485.51 469.559 1474.61 425.25L1401.65 128.62C1383.9 56.4617 1312.87 10.741 1239.84 24.468L984.094 72.5393C975.567 74.1422 966.909 74.9488 958.232 74.9488H522.256C512.951 74.9488 503.669 74.0211 494.548 72.1794Z"
-                stroke="url(#paint3_linear_102_8)"
-                strokeWidth="6"
-              />
-              <path
-                d="M1017.5 17L784.055 63.4048C751.953 69.7862 719.302 73 686.571 73L349.331 73C315.296 73 281.35 69.5249 248.021 62.6287L13 14"
-                stroke="url(#paint0_linear_102_24)"
-                transform="translate(230 0)"
-                stroke-width="4"
-              />
-              <path
-                d="M1017.5 17L784.055 63.4048C751.953 69.7862 719.302 73 686.571 73L349.331 73C315.296 73 281.35 69.5249 248.021 62.6287L13 14"
-                stroke="url(#paint0_linear_102_24)"
-                transform="translate(230 100)"
-                stroke-width="4"
-                opacity={0.4}
-              />
-            </g>
-          </g>
-        )}
+        {dashboard === 1 ? <SkinOneSVG /> : <SkinTwoSVG />}
 
-        <g id="clock">
-          ‍<circle cx={1200} cy={300} stroke={"rgb(149, 149, 149)"} opacity={0.35} r={100} strokeWidth={6}></circle>‍
-          <circle
-            style={{
-              transition: "stroke-dashoffset 1s linear",
-            }}
-            cx={1200}
-            cy={300}
-            stroke={"url(#grad)"}
-            opacity={0.5}
-            r={100}
-            strokeWidth={6}
-            strokeDasharray={628}
-            strokeDashoffset={628 - (628 * timeRemaining) / gameLength}
-            transform="rotate(270 1200 300)"
-          ></circle>
-        </g>
+        <ClockSVG timeRemaining={timeRemaining} gameLength={gameLength} />
         <g id="percent">
           ‍<circle cx={292} cy={270} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>‍
           <circle cx={292} cy={410} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>‍
           <circle cx={292} cy={550} stroke={"url(#accGrad)"} opacity={0.5} r={50} strokeWidth={6}></circle>
         </g>
-        <g id="speedBars">
-          <RectSVG
-            speedBarX={speedBarX}
-            speedBarY={speedBarY}
-            height={speedBarHeight}
-            fill="rgb(200, 200, 200, 0.14)"
-          />
-          <RectSVG
-            speedBarX={speedBarX + 30}
-            speedBarY={speedBarY}
-            height={speedBarHeight}
-            fill="rgb(200, 200, 200, 0.14)"
-          />
-          <RectSVG
-            speedBarX={speedBarX + 60}
-            speedBarY={speedBarY}
-            height={speedBarHeight}
-            fill="rgb(200, 200, 200, 0.14)"
-          />
-          <RectSVG
-            speedBarX={speedBarX + 90}
-            speedBarY={speedBarY}
-            height={speedBarHeight}
-            fill="rgb(200, 200, 200, 0.14)"
-          />
-          <RectSVG
-            speedBarX={speedBarX + 120}
-            speedBarY={speedBarY}
-            height={speedBarHeight}
-            fill="rgb(200, 200, 200, 0.14)"
-          />
-          <RectSVG
-            speedBarX={speedBarX}
-            speedBarY={speedBarY}
-            height={getSpeed(speedArray, 5, speedBarHeight)}
-            fill={speedBarColor}
-          />
-          <RectSVG
-            speedBarX={speedBarX + 30}
-            speedBarY={speedBarY}
-            height={getSpeed(speedArray, 4, speedBarHeight)}
-            fill={speedBarColor}
-          />
-          <RectSVG
-            speedBarX={speedBarX + 60}
-            speedBarY={speedBarY}
-            height={getSpeed(speedArray, 3, speedBarHeight)}
-            fill={speedBarColor}
-          />
-          <RectSVG
-            speedBarX={speedBarX + 90}
-            speedBarY={speedBarY}
-            height={getSpeed(speedArray, 2, speedBarHeight)}
-            fill={speedBarColor}
-          />
-          <RectSVG
-            speedBarX={speedBarX + 120}
-            speedBarY={speedBarY}
-            height={getSpeed(speedArray, 1, speedBarHeight)}
-            fill={speedBarColor}
-          />
-        </g>
+        <SpeedBarsSVG speedArray={speedArray} />
         <circle
           cx={cx}
           cy={cy}
@@ -226,7 +79,6 @@ const FullDashboard = ({
           style={{
             transition: "stroke-dashoffset 0.5s ease-in-out",
           }}
-          // stroke="hotpink"
           strokeWidth={strokeWidth}
           strokeDasharray={dashArray}
           strokeDashoffset={percentage}
