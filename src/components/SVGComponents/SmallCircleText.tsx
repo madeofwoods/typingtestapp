@@ -1,5 +1,3 @@
-import React from "react";
-
 type colorType = "white" | "violet" | "pink";
 type topType = 270 | 410 | 550;
 type tailwindDictionaryType = Record<colorType | topType, string>;

@@ -21,12 +21,9 @@ const FullDashboard = ({
 }: DashboardProps) => {
   const { gameLength, dashboard } = useContext(GlobalContext) as GlobalContextType;
 
-  const width: number = 800;
-  const height: number = 400;
-
   return (
     <div className={` relative flex justify-center items-center `}>
-      <svg width={width} height={height} viewBox="0 0 1492 717" className=" ">
+      <svg width={800} height={400} viewBox="0 0 1492 717" className=" ">
         {dashboard === 1 ? <SkinOneSVG /> : <SkinTwoSVG />}
         <ClockSVG timeRemaining={timeRemaining} gameLength={gameLength} />
         <SmallCirclesSVG />

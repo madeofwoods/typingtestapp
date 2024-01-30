@@ -1,5 +1,3 @@
-import React from "react";
-
 type LeftPositions = 370 | 1300 | 1320 | 292;
 type TopPositions = 270 | 410 | 550 | 300 | 555;
 type tailwindLeftPositions = Record<LeftPositions, string>;
