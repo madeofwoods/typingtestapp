@@ -22,25 +22,30 @@ const Game = () => {
   } = useContext(GlobalContext) as GlobalContextType;
   const { timeRemaining, startTimer, resetTimer, counter, setTimeLeft } = useTimer(gameLength);
 
+  //reset timer if game length is changed from 15 - 30 - 60 - 120
   useEffect(() => {
     resetTimer();
     setTimeLeft(gameLength);
   }, [gameLength, setTimeLeft, resetTimer]);
 
-  useEffect(() => {
-    setAllWords((prev) => prev + currentWords);
-  }, [currentWords, setAllWords]);
-
+  //generate new block of words if first block is completed
   useEffect(() => {
     if (allWords.length == numberChars) {
       setCurrentWords(generateWords(wordsPerLevel));
     }
   }, [numberChars, allWords, setCurrentWords]);
 
+  //update allWords if the first block is completed and another block is generated
+  useEffect(() => {
+    setAllWords((prev) => prev + currentWords);
+  }, [currentWords, setAllWords]);
+
+  //change game state
   useEffect(() => {
     timeRemaining == 0 && setGameState("finish");
   }, [timeRemaining, setGameState]);
 
+  //reset game
   useEffect(() => {
     gameState === "run" && startTimer();
 

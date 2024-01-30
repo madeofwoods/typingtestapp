@@ -7,8 +7,6 @@ const useTimer = (seconds: number) => {
   const milisecondsRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const startTimer = useCallback(() => {
-    console.log("starting timer");
-
     intervalRef.current = setInterval(() => {
       setTimeLeft((timeLeft) => timeLeft - 1);
     }, 1000);
@@ -20,8 +18,6 @@ const useTimer = (seconds: number) => {
   }, [setTimeLeft]);
 
   const resetTimer = useCallback(() => {
-    console.log("reset timer");
-
     intervalRef.current && clearInterval(intervalRef.current);
     //milisecs added
     milisecondsRef.current && clearInterval(milisecondsRef.current);
@@ -33,7 +29,6 @@ const useTimer = (seconds: number) => {
 
   useEffect(() => {
     if (!timeRemaining && intervalRef.current && milisecondsRef.current) {
-      console.log("clear timer");
       clearInterval(intervalRef.current);
       //milisecs added
       clearInterval(milisecondsRef.current);

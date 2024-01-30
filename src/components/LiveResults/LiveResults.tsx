@@ -11,10 +11,12 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   const [speedArray, setSpeedArray] = useState<number[]>([0, 0, 0, 0, 0]);
   const [liveWPM, setLiveWPM] = useState<number>(0);
 
+  //update wpm every second, or whenever a char is typed or deleted
   useEffect(() => {
     setLiveWPM(getNetWPM(typedChars.length, elapsedTime, errors));
   }, [elapsedTime, typedChars, errors]);
 
+  //reset the speedbar
   useEffect(() => {
     if (gameState == "reset") {
       setNumberTyped([]);

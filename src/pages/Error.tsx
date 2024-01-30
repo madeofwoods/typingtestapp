@@ -6,7 +6,6 @@ const Error = () => {
 
   useEffect(() => {
     navigate("/");
-    console.log("called");
   }, [navigate]);
   return <div>Error</div>;
 };
