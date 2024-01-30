@@ -1,4 +1,3 @@
-import React from "react";
 import RectSVG from "./RectSVG";
 import { getSpeed } from "../LiveResults/utils";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export type ClockSVGProps = {
   timeRemaining: number;
   gameLength: number;
