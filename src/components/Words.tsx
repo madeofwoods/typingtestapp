@@ -59,9 +59,9 @@ const Words = () => {
         {/* bring up keyboard for mobile */}
         <input
           type="text"
-          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-0 cursor-"
+          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-1 cursor-pointer pt-40 overflow-hidden"
           placeholder="hello"
-          value={"hello"}
+          value={typedChars}
           ref={inputElement}
           onClick={() => {
             inputElement.current?.focus();
