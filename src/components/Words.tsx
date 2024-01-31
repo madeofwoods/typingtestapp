@@ -58,7 +58,7 @@ const Words = () => {
         {/* bring up keyboard for mobile */}
         <input
           type="text"
-          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute invisible"
+          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-0"
           placeholder="hello"
           value={"hello"}
         />
