@@ -8,7 +8,7 @@ const Words = () => {
     GlobalContext
   ) as GlobalContextType;
   const [currentTyped, setCurrentTyped] = useState<string>("");
-  // const inputRef = useRef(null);
+  const inputRef = useRef(null);
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
