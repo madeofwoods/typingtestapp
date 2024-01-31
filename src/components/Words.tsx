@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { isCorrect, isIncorrect, isIncorrectSpace, isKeyboardCodeAllowed } from "../utils/utils";
 import classNames from "classnames";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
@@ -8,7 +8,7 @@ const Words = () => {
     GlobalContext
   ) as GlobalContextType;
   const [currentTyped, setCurrentTyped] = useState<string>("");
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
