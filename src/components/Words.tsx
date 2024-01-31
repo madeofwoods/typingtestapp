@@ -56,8 +56,8 @@ const Words = () => {
     <div className="w-full flex flex-2 justify-center">
       <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px]">
         {/* bring up keyboard for mobile */}
-        <textarea
-          // type="text"
+        <input
+          type="text"
           className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute invisible"
           placeholder="hello"
           value={"hello"}
