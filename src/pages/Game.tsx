@@ -61,7 +61,7 @@ const Game = () => {
   return (
     <div className="bg-black w-screen h-screen items-center  text-gray-300 font-mono">
       <Navbar />
-      <div className="flex items-center justify-start mt-8 sm:mt-0 sm:justify-evenly w-full h-[calc(100%-120px)] flex-col gap-8 md:gap-10 ">
+      <div className="flex items-center justify-start sm:justify-evenly w-full h-[calc(100%-120px)] flex-col gap-8 md:gap-10 ">
         <LiveResults timeRemaining={timeRemaining} counter={counter} />
         <Words />
       </div>
