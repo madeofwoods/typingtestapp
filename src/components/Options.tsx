@@ -47,8 +47,8 @@ const Options = () => {
           120
         </div>
       </div>
-      <div className=" text-sm md:text-base">skin</div>
-      <div className=" grid grid-rows-2 lg:grid-rows-1 grid-flow-col gap-5 items-center">
+      <div className="hidden sm:block text-sm md:text-base">skin</div>
+      <div className="hidden sm:grid  grid-rows-2 lg:grid-rows-1 grid-flow-col gap-5 items-center">
         <div
           onClick={() => setDashboard(1)}
           className={`  w-12 h-12 md:w-16 md:h-16 border  rounded-lg flex items-center justify-center cursor-pointer ${

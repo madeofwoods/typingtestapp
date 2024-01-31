@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext, GlobalContextType } from "../../context/GlobalContextProvider";
 import { calculateErrors, getAccuracy, getGrossWPM, getNetWPM } from "./utils";
 import FullDashboard from "../FullDashboard";
+import MobileDashboard from "../MobileDashboard";
 
 const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counter: number }) => {
   const { typedChars, numberChars, startTime, allWords, gameState } = useContext(GlobalContext) as GlobalContextType;
@@ -65,6 +66,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
 
   return (
     <div className=" w-full flex-4 mb-0">
+      <MobileDashboard wpm={liveWPM} timeRemaining={timeRemaining} elapsedTime={elapsedTime} errors={errors} />
       <FullDashboard
         typedChars={typedChars}
         elapsedTime={elapsedTime}
