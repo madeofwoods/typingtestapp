@@ -60,13 +60,6 @@ const Game = () => {
 
   return (
     <div className="bg-black w-screen h-screen items-center  text-gray-300 font-mono">
-      {/* bring up keyboard for mobile */}
-      <input
-        type="text"
-        className="block sm:hidden bg-white/20 w-full h-full absolute visible"
-        placeholder="hello"
-        value={"hello"}
-      />
       <Navbar />
       <div className="flex items-center justify-center  sm:justify-evenly w-full h-[calc(100%-120px)] flex-col gap-4 md:gap-10 ">
         <LiveResults timeRemaining={timeRemaining} counter={counter} />

@@ -55,6 +55,13 @@ const Words = () => {
   return (
     <div className="w-full flex flex-2 justify-center">
       <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px]">
+        {/* bring up keyboard for mobile */}
+        <textarea
+          // type="text"
+          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute invisible"
+          placeholder="hello"
+          value={"hello"}
+        />
         <div className="text-[1rem] md:text-[1.2rem] lg:text-[1.4rem] w-full tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
           {currentWords
             .split("")
