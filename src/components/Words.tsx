@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { isCorrect, isIncorrect, isIncorrectSpace, isKeyboardCodeAllowed } from "../utils/utils";
 import classNames from "classnames";
 import { GlobalContext, GlobalContextType } from "../context/GlobalContextProvider";
@@ -8,7 +8,7 @@ const Words = () => {
     GlobalContext
   ) as GlobalContextType;
   const [currentTyped, setCurrentTyped] = useState<string>("");
-  // const inputRef = useRef(null);
+  const inputElement = useRef<HTMLInputElement>(null);
 
   const keydownHandler = useCallback(
     (e: KeyboardEvent): void => {
@@ -59,11 +59,13 @@ const Words = () => {
         {/* bring up keyboard for mobile */}
         <input
           type="text"
-          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-0"
+          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-0 cursor-"
           placeholder="hello"
           value={"hello"}
-          autoFocus
-          // onClick={() => {inputRef.current?.focus()}}
+          ref={inputElement}
+          onClick={() => {
+            inputElement.current?.focus();
+          }}
         />
         <div className="text-[1rem] md:text-[1.2rem] lg:text-[1.4rem] w-full tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
           {currentWords
