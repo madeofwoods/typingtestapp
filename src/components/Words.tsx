@@ -55,19 +55,19 @@ const Words = () => {
 
   return (
     <div className="w-full flex flex-2 justify-center">
-      <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px]">
+      <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px] relative">
         {/* bring up keyboard for mobile */}
         <input
           type="text"
-          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-1 cursor-pointer pt-40 overflow-scroll"
-          placeholder="hello"
+          className="block sm:hidden bg-gray-900/10 w-[100%] h-[180px] absolute opacity-5 cursor-pointer pt-28 overflow-hidden rounded-3xl text-black/10"
+          placeholder=""
           value={typedChars}
           ref={inputElement}
           onClick={() => {
             inputElement.current?.focus();
           }}
         />
-        <div className="text-[1rem] md:text-[1.2rem] lg:text-[1.4rem] w-full tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
+        <div className="text-[1rem] md:text-[1.2rem] lg:text-[1.4rem] w-full   tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
           {currentWords
             .split("")
             .map((char) => (char === " " ? " " : char))
