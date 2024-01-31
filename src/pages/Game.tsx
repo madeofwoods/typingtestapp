@@ -16,7 +16,6 @@ const Game = () => {
     allWords,
     setAllWords,
     numberChars,
-    typedChars,
     setTypedChars,
     setNumberChars,
     gameLength,
