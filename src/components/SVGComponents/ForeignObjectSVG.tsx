@@ -15,7 +15,7 @@ const ForeignObjectSVG = ({ wpm, timeRemaining, accuracy, errors }: ForeignObjec
   const { typedChars } = useContext(GlobalContext) as GlobalContextType;
   return (
     <foreignObject x={0} y={0} width={"100%"} height={"100%"} className=" relative select-none ">
-      <body>
+      <body className="fixed w-full h-full">
         <ButtonsSVG setLabelsActive={setLabelsActive} />
         <div className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest ">
           {wpm.toFixed(0).padStart(3, "0")}
