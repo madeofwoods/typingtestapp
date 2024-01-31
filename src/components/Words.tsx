@@ -59,7 +59,7 @@ const Words = () => {
         {/* bring up keyboard for mobile */}
         <input
           type="text"
-          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-1 cursor-pointer pt-40 overflow-hidden"
+          className="block sm:hidden bg-white/20 w-[550px] min-h-[230px] absolute opacity-1 cursor-pointer pt-40 overflow-scroll"
           placeholder="hello"
           value={typedChars}
           ref={inputElement}
