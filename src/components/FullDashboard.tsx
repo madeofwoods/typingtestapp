@@ -25,7 +25,7 @@ const FullDashboard = ({
     <div className={` relative flex justify-center items-center z-0`}>
       <svg
         viewBox="0 0 1492 717"
-        className="w-[500px] h-[250px] md:w-[600px] md:h-[300px] lg:w-[700px] lg:h-[350px] xl:w-[800px] xl:h-[400px]"
+        className="w-[80vw] sm:w-[500px] h-[250px] md:w-[600px] md:h-[300px] lg:w-[700px] lg:h-[350px] xl:w-[800px] xl:h-[400px]"
       >
         {dashboard === 1 ? <SkinOneSVG /> : <SkinTwoSVG />}
         <ClockSVG timeRemaining={timeRemaining} gameLength={gameLength} />
