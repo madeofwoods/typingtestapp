@@ -7,31 +7,31 @@ type SpeedometerProps = {
   elapsedTime: number;
   errors: number;
 };
+const radius = 200;
+const circumference = 2 * Math.PI * radius;
+const arc = (circumference * 270) / 360;
+const dashArray = `${arc} ${circumference}`;
 
 const Speedometer = ({ typedChars, elapsedTime, errors }: SpeedometerProps) => {
-  const [percentage, setPercentage] = useState<number>(942.47);
-  const radius = 200;
-  const circumference = 2 * Math.PI * radius;
-  const arc = (circumference * 270) / 360;
-  const dashArray = `${arc} ${circumference}`;
-
+  const [offset, setOffset] = useState<number>(arc);
   //update WPM speedometer
   useEffect(() => {
     if (typedChars) {
       const speed = getNetWPM(typedChars.length, elapsedTime, errors);
+      // percentNormalized -- make 100% of the speedometer be at 100+ wpm
       const percentNormalized = Math.min(Math.max(speed, 0), 100);
-      const offset = arc - (percentNormalized / 100) * arc;
+      const currentOffset = arc - (percentNormalized / 100) * arc;
 
-      setPercentage(offset);
-    } else setPercentage(arc);
-  }, [typedChars, elapsedTime, errors, arc]);
+      setOffset(currentOffset);
+    } else setOffset(arc);
+  }, [typedChars, elapsedTime, errors]);
 
   return (
     <g>
       <SpeedometerCircleSVG stroke={"rgba(35, 35, 35, 0.468)"} dashArray={dashArray} />
-      <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} percentage={percentage} />
+      <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} offset={offset} />
       <g filter="url(#f1)">
-        <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} percentage={percentage} />
+        <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} offset={offset} />
       </g>
     </g>
   );

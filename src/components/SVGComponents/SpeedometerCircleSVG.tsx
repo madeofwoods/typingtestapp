@@ -1,11 +1,11 @@
 const SpeedometerCircleSVG = ({
   stroke,
   dashArray,
-  percentage,
+  offset,
 }: {
   stroke: string;
   dashArray?: string;
-  percentage?: number;
+  offset?: number;
 }) => {
   const cx = -70;
   const cy = -380;
@@ -24,7 +24,7 @@ const SpeedometerCircleSVG = ({
       style={{ transition: "stroke-dashoffset 0.5s ease-in-out" }}
       strokeWidth={strokeWidth}
       strokeDasharray={dashArray}
-      strokeDashoffset={percentage ? percentage : dashArray}
+      strokeDashoffset={offset ? offset : dashArray}
     />
   );
 };
