@@ -64,7 +64,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   }, [typedChars, startTime, timeRemaining, allWords]);
 
   return (
-    <div className=" w-[800px] h-[400px] mb-0">
+    <div className=" w-full flex-4mb-0">
       <FullDashboard
         typedChars={typedChars}
         elapsedTime={elapsedTime}

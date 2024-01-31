@@ -53,24 +53,26 @@ const Words = () => {
   }, [currentWords]);
 
   return (
-    <div id="wordsContainer" className=" w-[800px]  select-none min-h-[230px]">
-      <div className="text-[1.4rem] w-[800px] tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
-        {currentWords
-          .split("")
-          .map((char) => (char === " " ? " " : char))
-          .map((char, index) => (
-            <span
-              key={`${char}_${index}`}
-              className={`${classNames({
-                "text-purple-500": isCorrect(char, index, currentTyped, currentTyped.length),
-                "text-pink-600": isIncorrect(char, index, currentTyped, currentTyped.length),
-                "bg-pink-600/50": isIncorrectSpace(char, index, currentTyped, currentTyped.length),
-                "animate-caret": index == currentTyped.length,
-              })} `}
-            >
-              {char}
-            </span>
-          ))}
+    <div className="w-full flex flex-2 justify-center">
+      <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px]">
+        <div className="text-[1rem] md:text-[1.2rem] lg:text-[1.4rem] w-full tracking-normal leading-relaxed whitespace-break-spaces bg-gray-900/30 pl-[40px] pr-[20px] py-10 rounded-3xl">
+          {currentWords
+            .split("")
+            .map((char) => (char === " " ? " " : char))
+            .map((char, index) => (
+              <span
+                key={`${char}_${index}`}
+                className={`${classNames({
+                  "text-purple-500": isCorrect(char, index, currentTyped, currentTyped.length),
+                  "text-pink-600": isIncorrect(char, index, currentTyped, currentTyped.length),
+                  "bg-pink-600/50": isIncorrectSpace(char, index, currentTyped, currentTyped.length),
+                  "animate-caret": index == currentTyped.length,
+                })} `}
+              >
+                {char}
+              </span>
+            ))}
+        </div>
       </div>
     </div>
   );
