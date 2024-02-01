@@ -14,7 +14,7 @@ const ForeignObjectSVG = ({ wpm, timeRemaining, accuracy, errors }: ForeignObjec
   const [labelsActive, setLabelsActive] = useState<boolean>(false);
   const { typedChars } = useContext(GlobalContext) as GlobalContextType;
   return (
-    <foreignObject x={0} y={0} className=" relative select-none w-full h-full">
+    <foreignObject x={0} y={0} className=" relative select-none w-[1491px] h-[717px]">
       <body className="fixed w-full h-full">
         <ButtonsSVG setLabelsActive={setLabelsActive} />
         <div className=" text-gray-100/80 text-7xl absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[40px] text-left tracking-widest ">

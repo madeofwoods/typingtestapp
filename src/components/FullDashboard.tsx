@@ -31,11 +31,14 @@ const FullDashboard = ({
         <ClockSVG timeRemaining={timeRemaining} gameLength={gameLength} />
         <SmallCirclesSVG />
         <SpeedBarsSVG speedArray={speedArray} />
-        <Speedometer elapsedTime={elapsedTime} typedChars={typedChars} errors={errors} />
+        <Speedometer
+          elapsedTime={elapsedTime}
+          typedChars={typedChars}
+          errors={errors}
+          filter="url(#f1)"
+          stroke="url(#grad)"
+        />
         <ForeignObjectSVG accuracy={accuracy} errors={errors} timeRemaining={timeRemaining} wpm={wpm} />
-        <foreignObject>
-          <div className="">test</div>
-        </foreignObject>
         <FiltersSVG />
       </svg>
     </div>

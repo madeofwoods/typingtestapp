@@ -6,14 +6,20 @@ const MobileSVG = ({ elapsedTime, errors }: { elapsedTime: number; errors: numbe
   const { typedChars } = useContext(GlobalContext) as GlobalContextType;
   return (
     <svg viewBox="250 180 1000 350" className="w-[280px] h-[150px] ">
-      <Speedometer typedChars={typedChars} elapsedTime={elapsedTime} errors={errors} />
+      <Speedometer
+        typedChars={typedChars}
+        elapsedTime={elapsedTime}
+        errors={errors}
+        filter="url(#fMobile)"
+        stroke="url(#gradMobile)"
+      />
       <defs>
-        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="gradMobile" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0.0408604" stopColor="#dc4eff" />
           <stop offset="0.436563" stopColor="#DD2FCD" />
           <stop offset="1" stopColor="#3827FF" />
         </linearGradient>
-        <filter id="f1" x="0" y="0" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <filter id="fMobile" x="0" y="0" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_10_2" />

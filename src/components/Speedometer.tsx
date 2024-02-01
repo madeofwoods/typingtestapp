@@ -6,13 +6,15 @@ type SpeedometerProps = {
   typedChars: string;
   elapsedTime: number;
   errors: number;
+  stroke: string;
+  filter: string;
 };
 const radius = 200;
 const circumference = 2 * Math.PI * radius;
 const arc = (circumference * 270) / 360;
 const dashArray = `${arc} ${circumference}`;
 
-const Speedometer = ({ typedChars, elapsedTime, errors }: SpeedometerProps) => {
+const Speedometer = ({ typedChars, elapsedTime, errors, stroke, filter }: SpeedometerProps) => {
   const [offset, setOffset] = useState<number>(arc);
   //update WPM speedometer
   useEffect(() => {
@@ -29,9 +31,9 @@ const Speedometer = ({ typedChars, elapsedTime, errors }: SpeedometerProps) => {
   return (
     <g>
       <SpeedometerCircleSVG stroke={"rgba(35, 35, 35, 0.468)"} dashArray={dashArray} />
-      <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} offset={offset} />
-      <g filter="url(#f1)">
-        <SpeedometerCircleSVG stroke={"url(#grad)"} dashArray={dashArray} offset={offset} />
+      <SpeedometerCircleSVG stroke={stroke} dashArray={dashArray} offset={offset} />
+      <g filter={filter}>
+        <SpeedometerCircleSVG stroke={stroke} dashArray={dashArray} offset={offset} />
       </g>
     </g>
   );
