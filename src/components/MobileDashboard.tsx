@@ -16,7 +16,7 @@ const MobileDashboard = ({
 }) => {
   const { setGameState } = useContext(GlobalContext) as GlobalContextType;
   return (
-    <div className="relative flex justify-center items-center z-0 select-none sm:hidden">
+    <div className="relative flex justify-center items-center z-0 select-none md:hidden">
       <div className="flex flex-col justify-center items-center gap-4">
         <MobileSVG elapsedTime={elapsedTime} errors={errors} />
         <div className="flex gap-8 items-center justify-center">
