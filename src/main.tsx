@@ -22,8 +22,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  <GlobalContextProvider>
-    <RouterProvider router={router} />
-  </GlobalContextProvider>
+  // <GlobalContextProvider>
+  <RouterProvider router={router} />
+  // </GlobalContextProvider>
   // </React.StrictMode>,
 );

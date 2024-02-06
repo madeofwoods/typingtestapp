@@ -20,7 +20,7 @@ const MobileSVG = ({ elapsedTime, errors }: { elapsedTime: number; errors: numbe
           <stop offset="1" stopColor="#3827FF" />
         </linearGradient>
         <filter id="fMobile" x="0" y="0" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_10_2" />
         </filter>

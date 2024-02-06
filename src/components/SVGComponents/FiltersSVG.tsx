@@ -3,26 +3,26 @@ const FiltersSVG = () => {
     <defs>
       {/* Skin1 */}
       <linearGradient id="skin1_1" x1="1555" y1="379.5" x2="790" y2="476" gradientUnits="userSpaceOnUse">
-        <stop offset="0.0289673" stop-color="#1F1F1F" />
-        <stop offset="1" stop-color="#242424" stop-opacity="0" />
+        <stop offset="0.0289673" stopColor="#1F1F1F" />
+        <stop offset="1" stopColor="#242424" stopOpacity="0" />
       </linearGradient>
       <linearGradient id="skin1_2" x1="1492" y1="121" x2="777.5" y2="592" gradientUnits="userSpaceOnUse">
-        <stop offset="0.0829187" stop-color="#CC00FF" />
-        <stop offset="1" stop-color="#EB00FF" stop-opacity="0" />
+        <stop offset="0.0829187" stopColor="#CC00FF" />
+        <stop offset="1" stopColor="#EB00FF" stopOpacity="0" />
       </linearGradient>
       <linearGradient id="skin1_3" x1="-260.5" y1="531" x2="332" y2="295.5" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#a073c3" />
-        <stop offset="1" stop-color="#242424" stop-opacity="0" />
+        <stop stopColor="#a073c3" />
+        <stop offset="1" stopColor="#242424" stopOpacity="0" />
       </linearGradient>
       <linearGradient id="skin1_4" x1="-96.5" y1="375.5" x2="718.5" y2="350" gradientUnits="userSpaceOnUse">
-        <stop offset="0.0829187" stop-color="#743DB9" />
-        <stop offset="1" stop-color="#EB00FF" stop-opacity="0" />
+        <stop offset="0.0829187" stopColor="#743DB9" />
+        <stop offset="1" stopColor="#EB00FF" stopOpacity="0" />
       </linearGradient>
       {/* Skin2 */}
       <linearGradient id="skin2_1" x1="501.5" y1="141" x2="501.459" y2="37.5" gradientUnits="userSpaceOnUse">
         <stop stopColor="#F31DEA" />
-        <stop offset="0.468154" stop-color="#a74fff" stop-opacity="0.79" />
-        <stop offset="1" stop-color="#df80ff" stop-opacity="0" />
+        <stop offset="0.468154" stopColor="#a74fff" stopOpacity="0.79" />
+        <stop offset="1" stopColor="#df80ff" stopOpacity="0" />
       </linearGradient>
       <filter
         id="skin2Filter"
@@ -70,7 +70,7 @@ const FiltersSVG = () => {
         <stop offset="1" stopColor="#ff0000" />
       </linearGradient>
       <filter id="f1" x="0" y="0" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
         <feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_10_2" />
       </filter>
