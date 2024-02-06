@@ -5,7 +5,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import Error from "./pages/Error.tsx";
 import Game from "./pages/Game.tsx";
-import GlobalContextProvider from "./context/GlobalContextProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,8 +21,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-  // <GlobalContextProvider>
   <RouterProvider router={router} />
-  // </GlobalContextProvider>
   // </React.StrictMode>,
 );
