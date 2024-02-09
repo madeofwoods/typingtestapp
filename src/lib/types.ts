@@ -6,4 +6,5 @@ export type DashboardProps = {
   accuracy: number;
   speedArray: number[];
   wpm: number;
+  counter: number;
 };

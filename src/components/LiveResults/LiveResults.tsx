@@ -75,6 +75,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
         accuracy={getAccuracy(typedChars, errors)}
         speedArray={speedArray}
         wpm={liveWPM}
+        counter={counter}
       />
     </div>
   );

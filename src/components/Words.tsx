@@ -58,6 +58,7 @@ const Words = () => {
       <div id="wordsContainer" className=" w-[550px]  md:w-[650px] lg:w-[800px]  select-none min-h-[230px] relative">
         {/* bring up keyboard for mobile */}
         <input
+          onChange={() => {}}
           type="text"
           className="block md:hidden bg-gray-900/0 w-[100%] h-[180px] absolute opacity-5 cursor-default caret-transparent pt-28 overflow-hidden rounded-3xl text-black/0 outline-none focus:outline-none hover:outline-none"
           placeholder=""

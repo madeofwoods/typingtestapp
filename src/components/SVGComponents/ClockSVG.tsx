@@ -1,9 +1,11 @@
 export type ClockSVGProps = {
-  timeRemaining: number;
   gameLength: number;
+  counter: number;
 };
 
-const ClockSVG = ({ timeRemaining, gameLength }: ClockSVGProps) => {
+const ClockSVG = ({ gameLength, counter }: ClockSVGProps) => {
+  const remaining: number = Number((gameLength - counter / 5).toFixed(2));
+  console.log("remaining", remaining);
   return (
     <g id="clock">
       {/* Background Clock */}
@@ -11,7 +13,7 @@ const ClockSVG = ({ timeRemaining, gameLength }: ClockSVGProps) => {
       {/* Reactive Clock */}
       <circle
         style={{
-          transition: "stroke-dashoffset 1s linear",
+          transition: "stroke-dashoffset 0.2s linear",
         }}
         cx={1200}
         cy={300}
@@ -20,7 +22,7 @@ const ClockSVG = ({ timeRemaining, gameLength }: ClockSVGProps) => {
         r={100}
         strokeWidth={6}
         strokeDasharray={628}
-        strokeDashoffset={628 - (628 * timeRemaining) / gameLength}
+        strokeDashoffset={628 - (628 * remaining) / gameLength}
         transform="rotate(270 1200 300)"
       ></circle>
     </g>

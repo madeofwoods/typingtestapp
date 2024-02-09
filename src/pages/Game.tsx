@@ -20,13 +20,13 @@ const Game = () => {
     setNumberChars,
     gameLength,
   } = useContext(GlobalContext) as GlobalContextType;
-  const { timeRemaining, startTimer, resetTimer, counter, setTimeLeft } = useTimer(gameLength);
+  const { timeRemaining, startTimer, resetTimer, counter, setTimeRemaining } = useTimer(gameLength);
 
   //reset timer if game length is changed from 15 - 30 - 60 - 120
   useEffect(() => {
     resetTimer();
-    setTimeLeft(gameLength);
-  }, [gameLength, setTimeLeft, resetTimer]);
+    setTimeRemaining(gameLength);
+  }, [gameLength, setTimeRemaining, resetTimer]);
 
   //generate new block of words if first block is completed
   useEffect(() => {

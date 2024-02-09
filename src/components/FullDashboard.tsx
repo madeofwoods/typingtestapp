@@ -18,6 +18,7 @@ const FullDashboard = ({
   accuracy,
   speedArray,
   wpm,
+  counter,
 }: DashboardProps) => {
   const { gameLength, dashboard } = useContext(GlobalContext) as GlobalContextType;
 
@@ -28,7 +29,7 @@ const FullDashboard = ({
         className="w-[80vw] sm:w-[500px] h-[250px] md:w-[600px] md:h-[300px] lg:w-[700px] lg:h-[350px] xl:w-[800px] xl:h-[400px]"
       >
         {dashboard === 1 ? <SkinOneSVG /> : <SkinTwoSVG />}
-        <ClockSVG timeRemaining={timeRemaining} gameLength={gameLength} />
+        <ClockSVG gameLength={gameLength} counter={counter} />
         <SmallCirclesSVG />
         <SpeedBarsSVG speedArray={speedArray} />
         <Speedometer
