@@ -18,7 +18,6 @@ const SpeedometerCircleSVG = ({
       cy={cy}
       fill="transparent"
       r={innerRadius}
-      // transform={"rotate(135 150 150) translate(5 -95)"}
       transform={"rotate(135 746 450)"}
       stroke={stroke}
       strokeLinecap="butt"

@@ -11,6 +11,7 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
   const [numberTyped, setNumberTyped] = useState<number[]>([]);
   const [speedArray, setSpeedArray] = useState<number[]>([0, 0, 0, 0, 0]);
   const [liveWPM, setLiveWPM] = useState<number>(0);
+  const [counterCheck, setCounterCheck] = useState<number>(0);
 
   //update wpm every second, or whenever a char is typed or deleted
   useEffect(() => {
@@ -22,39 +23,45 @@ const LiveResults = ({ timeRemaining, counter }: { timeRemaining: number; counte
     if (gameState == "reset") {
       setNumberTyped([]);
       setSpeedArray([0, 0, 0, 0, 0]);
+      setCounterCheck(0);
     }
   }, [gameState]);
 
   // updating and storing the speed over the last second, updating every 0.2s (counter)
+  // use counterCheck to only trigger this logic when when counter changes
+
   useEffect(() => {
-    if (
-      (counter > 5 && numberChars >= numberTyped[counter - 6]) ||
-      (counter <= 5 && numberChars >= numberTyped[counter - 1])
-    ) {
-      const lettersToCheck =
-        counter > 4
-          ? typedChars.slice(numberTyped[counter - 6], numberChars)
-          : typedChars.slice(numberTyped[counter], numberChars);
-      const correctLettersToCheck = allWords.slice(
-        counter > 4 ? numberTyped[counter - 6] : numberTyped[counter],
-        numberChars
-      );
+    if (counterCheck < counter) {
+      if (
+        (counter > 5 && numberChars >= numberTyped[counter - 6]) ||
+        (counter <= 5 && numberChars >= numberTyped[counter - 1])
+      ) {
+        const lettersToCheck =
+          counter > 4
+            ? typedChars.slice(numberTyped[counter - 6], numberChars)
+            : typedChars.slice(numberTyped[counter], numberChars);
+        const correctLettersToCheck = allWords.slice(
+          counter > 4 ? numberTyped[counter - 6] : numberTyped[counter],
+          numberChars
+        );
 
-      let corr = 0;
-      let err = 0;
+        let corr = 0;
+        let err = 0;
 
-      lettersToCheck.split("").forEach((el, i) => {
-        el == correctLettersToCheck[i] ? corr++ : err++;
-      });
+        lettersToCheck.split("").forEach((el, i) => {
+          el == correctLettersToCheck[i] ? corr++ : err++;
+        });
 
-      const speed = getGrossWPM(corr, 1);
+        const speed = getGrossWPM(corr, 1);
 
-      setSpeedArray((prev) => [...prev, speed]);
-    } else {
-      setSpeedArray((prev) => [...prev, 0]);
+        setSpeedArray((prev) => [...prev, speed]);
+      } else {
+        setSpeedArray((prev) => [...prev, 0]);
+      }
+      setNumberTyped((prev) => [...prev, typedChars.length]);
+      setCounterCheck((prev) => prev + 1);
     }
-    setNumberTyped((prev) => [...prev, typedChars.length]);
-  }, [counter]);
+  }, [allWords, counter, counterCheck, numberChars, numberTyped, typedChars]);
 
   //calculte an accurate length of time that the game has been running
   useEffect(() => {

@@ -5,7 +5,6 @@ export type ClockSVGProps = {
 
 const ClockSVG = ({ gameLength, counter }: ClockSVGProps) => {
   const remaining: number = Number((gameLength - counter / 5).toFixed(2));
-  console.log("remaining", remaining);
   return (
     <g id="clock">
       {/* Background Clock */}

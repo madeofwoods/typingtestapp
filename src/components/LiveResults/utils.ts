@@ -7,9 +7,9 @@ export const getNetWPM = (numChar: number, time: number, numErrors: number): num
 };
 
 export const calculateErrors = (actual: string, typed: string): number => {
-  return typed.split("").reduce((prev, curr, index) => {
-    curr !== actual[index] && prev++;
-    return prev;
+  return typed.split("").reduce((acc, curr, index) => {
+    curr !== actual[index] && acc++;
+    return acc;
   }, 0);
 };
 
